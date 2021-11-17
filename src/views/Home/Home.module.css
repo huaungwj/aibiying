@@ -1,4 +1,37 @@
 .homeContainer {
-  width: 100vw;
-  overflow: hidden;
+    width: 100vw;
+    overflow: hidden;
+}
+
+.bannerBox {
+    margin-top: 120px !important;
+}
+
+.bannerBox > .bannerText {
+    font-weight: 600 !important;
+    display: block !important;
+}
+
+@media (min-width: 1128px) {
+    .bannerText {
+        font-size: calc(0.5vw + 42px) !important;
+        line-height: calc(0.7vw + 48px) !important;
+    }
+    .bannerBox > p {
+        font-weight: 600 !important;
+        font-size: calc(0.5vw + 42px) !important;
+        line-height: calc(0.7vw + 48px) !important;
+    }
+}
+
+@media (min-width: 744px) {
+    .bannerText {
+        letter-spacing: normal !important;
+        font-family: Circular, -apple-system, BlinkMacSystemFont, Roboto,
+            "Helvetica Neue", "PingFang-SC", "Hiragino Sans GB", "微软雅黑",
+            "Microsoft YaHei", "Heiti SC", sans-serif !important;
+    }
+    .bannerBox > p {
+        color: #484848 !important;
+    }
 }

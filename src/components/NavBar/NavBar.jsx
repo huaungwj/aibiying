@@ -6,13 +6,8 @@ import { SearchOutlined, MenuOutlined } from "@ant-design/icons";
 import PropTypes from "prop-types";
 
 function NavBar(props) {
-    // 当前路由地址
-    // const [nowLocation, setNowLocation] = useState("");
+    
 
-    // useEffect(() => {
-    //     console.log(props);
-    //     setNowLocation(props.location.pathname);
-    // }, []);
     return (
         <div className={NavBarStyle.navBarContainer}>
             {/* logo */}
@@ -55,7 +50,12 @@ function NavBar(props) {
                     </li>
                 </ul>
                 {/* 个人中心 */}
-                <div className={NavBarStyle.personalCenter}>
+                <div
+                    className={NavBarStyle.personalCenter}
+                    onClick={(e) => {
+                        onChangeSelectStatus(!isShowSelect, e);
+                    }}
+                >
                     <button>
                         <MenuOutlined />
                         <svg
@@ -75,13 +75,25 @@ function NavBar(props) {
                             <path d="m16 .7c-8.437 0-15.3 6.863-15.3 15.3s6.863 15.3 15.3 15.3 15.3-6.863 15.3-15.3-6.863-15.3-15.3-15.3zm0 28c-4.021 0-7.605-1.884-9.933-4.81a12.425 12.425 0 0 1 6.451-4.4 6.507 6.507 0 0 1 -3.018-5.49c0-3.584 2.916-6.5 6.5-6.5s6.5 2.916 6.5 6.5a6.513 6.513 0 0 1 -3.019 5.491 12.42 12.42 0 0 1 6.452 4.4c-2.328 2.925-5.912 4.809-9.933 4.809z"></path>
                         </svg>
                     </button>
-                </div>
-                {/* 下拉列表 */}
-                <div className={NavBarStyle.personalSelect}>
-                    <ul>
-                        <li>sign up</li>
-                        <li>Login</li>
-                    </ul>
+
+                    {/* 下拉列表 */}
+                    <div
+                        className={NavBarStyle.personalSelect}
+                        style={{ display: isShowSelect ? "flex" : "none" }}
+                    >
+                        <ul>
+                            <li
+                                className={NavBarStyle.PersonalLiFirst}
+                                onClick={(e) => {
+                                    e.nativeEvent.stopImmediatePropagation();
+                                    console.log(123);
+                                }}
+                            >
+                                Login
+                            </li>
+                            <li>sign up</li>
+                        </ul>
+                    </div>
                 </div>
             </div>
         </div>
