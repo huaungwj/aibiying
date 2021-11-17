@@ -14,3 +14,15 @@ export const setUserInfo = (userInfo) => {
         payload: userInfo,
     }
 }
+
+/**
+ *
+ * @param {boolean} visiable
+ * @returns
+ */
+export const setUserVisiable = (visiable) => {
+    return {
+        type: Types.UserVisiable,
+        payload: visiable
+    }
+}

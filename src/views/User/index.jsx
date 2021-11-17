@@ -1,13 +1,16 @@
 import React, { useCallback, useEffect, useRef, useState } from "react";
 import { Modal, Form, Input, Divider, message } from "antd";
-import PropTypes from "prop-types";
+import { useDispatch, useSelector } from "react-redux";
 
 import Style from "./index.module.css";
 import Api, { StorageTokenName } from "../../api";
+import * as UserAction from "../../store/actions/user";
 
 function User(props) {
     const [isRegister, setRegisterState] = useState(false);
     const form = useRef();
+    const dispatch = useDispatch();
+    const UserState = useSelector(state => state.user);
 
     const changeLoginType = useCallback(() => {
         form.current.resetFields();
@@ -21,8 +24,10 @@ function User(props) {
                 email: value.email,
                 name: value.email,
                 token: res.token,
-            }
+            };
+            dispatch(UserAction.setUserInfo(data));
             localStorage.setItem(StorageTokenName, JSON.stringify(data));
+            onCancel();
         };
         if (isRegister) {
             Api.Register(value).then(successFn).catch(err => {
@@ -35,18 +40,26 @@ function User(props) {
         });
     }, [isRegister]);
 
+    const onCancel = useCallback(() => {
+        dispatch(UserAction.setUserVisiable(false));
+    }, []);
+
     useEffect(() => {
-        const userInfo = localStorage.getItem(StorageTokenName);
-        console.log(userInfo);
+        try {
+            const userInfo = JSON.parse(localStorage.getItem(StorageTokenName));
+            dispatch(UserAction.setUserInfo(userInfo));
+        } catch (error) {
+            console.log("Invalid userinfo. You must login");
+        }
     }, []);
 
     return <>
         <Modal
-            visible={props.visible}
+            visible={UserState.visible}
             title="Log in or sign up"
             footer={false}
             className={Style["ant-modal-content"]}
-            onCancel={props.onCancel}
+            onCancel={onCancel}
         >
             <h2>Welcome to Airbnb</h2>
             <Form ref={form} onFinish={onFinish}>
@@ -121,15 +134,6 @@ function User(props) {
             </button>
         </Modal>
     </>
-}
-
-User.defaultProps = {
-    visible: true,
-}
-
-User.propTypes = {
-    visible: PropTypes.bool.isRequired,
-    onCancel: PropTypes.func.isRequired,
 }
 
 export default User;
