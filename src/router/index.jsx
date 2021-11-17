@@ -2,7 +2,7 @@ import React from "react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import routes from "../router/config";
 import { Provider } from "react-redux";
-// import Nav
+import NavBar from "../components/NavBar/NavBar";
 
 import store from "../store";
 
@@ -11,6 +11,7 @@ export default function RouteConfigExample() {
         <Provider store={store}>
             <Router>
                 <div>
+                    <NavBar />
                     <Switch>
                         {routes.map((route, i) => (
                             <RouteWithSubRoutes key={i} {...route} />
