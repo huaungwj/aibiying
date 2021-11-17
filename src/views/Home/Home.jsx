@@ -4,7 +4,7 @@ import HomeStyle from "./Home.module.css";
 export default function Home() {
     return (
         <div className={HomeStyle.homeContainer}>
-            {/* <div className={}></div> */}
+            <div className={HomeStyle.bannerText}></div>
         </div>
     );
 }
