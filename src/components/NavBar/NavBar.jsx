@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, {/*  useEffect, useState  */} from "react";
 import NavBarStyle from "./Navbar.module.css";
 import { withRouter, Link } from "react-router-dom";
 import logo from "../../assets/logo.jpg";
@@ -6,19 +6,7 @@ import { SearchOutlined, MenuOutlined } from "@ant-design/icons";
 import PropTypes from "prop-types";
 
 function NavBar(props) {
-    // 当前路由地址
-    const [nowLocation, setNowLocation] = useState("");
-    // 是否显示下拉菜单
-    const [isShowSelect, setIsShowSelect] = useState(false);
-    useEffect(() => {
-        console.log(props);
-        setNowLocation(props.location.pathname);
-    }, []);
-
-    // onchang isShowSelect status showLogin or hiddenLogin
-    const onChangeSelectStatus = (status) => {
-        setIsShowSelect(status);
-    };
+    
 
     return (
         <div className={NavBarStyle.navBarContainer}>
@@ -45,16 +33,20 @@ function NavBar(props) {
                 <ul>
                     <li
                         className={
-                            nowLocation === "/" ? NavBarStyle.liActive : ""
+                            props.location.pathname === "/" ? NavBarStyle.liActive : ""
                         }
                     >
-                        <Link>首页</Link>
+                        <Link to="/">首页</Link>
+                    </li>
+                    <li
+                        className={
+                            /^\/house/.test(props.location.pathname) ? NavBarStyle.liActive : ""
+                        }
+                    >
+                        <Link to="/house">房源</Link>
                     </li>
                     <li>
-                        <Link>发布房源</Link>
-                    </li>
-                    <li>
-                        <Link>预定管理</Link>
+                        <Link to="/">预定管理</Link>
                     </li>
                 </ul>
                 {/* 个人中心 */}
