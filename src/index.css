@@ -18,3 +18,14 @@
 li {
     list-style: none;
 }
+
+/* 公共样式 aby_container */
+.aby_container {
+    margin: 0 auto;
+    max-width: 1100px;
+}
+
+@media (min-width: 744px) {
+    .aby_container {
+    }
+}
