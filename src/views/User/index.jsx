@@ -1,24 +1,28 @@
-import React, { useCallback, useRef, useState } from "react";
+import React, { useCallback, useEffect, useRef, useState } from "react";
 import { Modal, Form, Input, Divider, message } from "antd";
 import PropTypes from "prop-types";
 
 import Style from "./index.module.css";
 import Api, { StorageTokenName } from "../../api";
 
-// console.log(Style);
 function User(props) {
-    const [isRegister, setRegisterState] = useState(true);
+    const [isRegister, setRegisterState] = useState(false);
     const form = useRef();
 
     const changeLoginType = useCallback(() => {
         form.current.resetFields();
         setRegisterState(!isRegister);
-    }, [isRegister])
+    }, [isRegister]);
 
     const onFinish = useCallback((value) => {
         // console.log(value);
         const successFn = (res) => {
-            localStorage.setItem(StorageTokenName, res.token);
+            const data = {
+                email: value.email,
+                name: value.email,
+                token: res.token,
+            }
+            localStorage.setItem(StorageTokenName, JSON.stringify(data));
         };
         if (isRegister) {
             Api.Register(value).then(successFn).catch(err => {
@@ -30,6 +34,11 @@ function User(props) {
             message.error(`${err.response.data.error}. You Can to Register`);
         });
     }, [isRegister]);
+
+    useEffect(() => {
+        const userInfo = localStorage.getItem(StorageTokenName);
+        console.log(userInfo);
+    }, []);
 
     return <>
         <Modal
@@ -112,6 +121,10 @@ function User(props) {
             </button>
         </Modal>
     </>
+}
+
+User.defaultProps = {
+    visible: true,
 }
 
 User.propTypes = {

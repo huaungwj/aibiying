@@ -1,1 +1,1 @@
-export const StorageTokenName = "AirbnbAuthToken";
+export const StorageTokenName = "AirbnbAuthUserInfo";
