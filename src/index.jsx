@@ -1,11 +1,13 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import './index.css';
-import App from './App';
+import React from "react";
+import ReactDOM from "react-dom";
+
+import User from "./views/User/index";
+import "antd/dist/antd.min.css";
+import "./index.css";
 
 ReactDOM.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
-  document.getElementById('root'),
+    <React.Fragment>
+        <User />
+    </React.Fragment>,
+    document.getElementById("root"),
 );
