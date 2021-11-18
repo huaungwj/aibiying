@@ -132,10 +132,6 @@ export const ApiAcceptBooking = (bookingid) => {
     return axios.put("/bookings/accept/" + bookingid);
 };
 
-export const ApiGetBookings = () => {
-    return axios.get("/bookings")
-}
-
 export const ApiAddComment = (listingid, bookingid, review) => {
     const url = "/listings/" + listingid + "/review/" + bookingid;
     return axios.put(url, {

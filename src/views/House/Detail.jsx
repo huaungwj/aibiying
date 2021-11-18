@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useState } from "react";
-import { useHistory, useParams } from "react-router";
+import { useHistory, useParams, withRouter } from "react-router";
 import PropTypes from "prop-types";
 import { Divider, Tag, Space, Rate, Row, Col, Input, Button, DatePicker, message, Comment } from "antd";
 import moment from "moment";
@@ -55,7 +55,7 @@ const HouseDetail = () => {
             console.log((stars / data.reviews.length) || 0);
             setRateStars((stars / data.reviews.length) || 0)
         }).catch(() => {
-            history.back();
+            history.push("/");
         })
     };
 
@@ -136,6 +136,7 @@ const HouseDetail = () => {
                             onChange={(stars) => {
                                 setStars(stars);
                             }}
+                            value={stars}
                         />
                         <Divider />
                         <span>Are you satisfied ?</span>
@@ -247,4 +248,4 @@ const HouseDetail = () => {
     </div>
 };
 
-export default HouseDetail;
+export default withRouter(HouseDetail);

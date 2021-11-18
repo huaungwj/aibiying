@@ -41,10 +41,7 @@ function User(props) {
         });
     }, [isRegister]);
 
-    const initialState = {
-        email: "1835773652@qq.com",
-        password: "123456",
-    };
+    const initialState = {};
 
     const onCancel = useCallback(() => {
         dispatch(UserAction.setUserVisiable(false));
