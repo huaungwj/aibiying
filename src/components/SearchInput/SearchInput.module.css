@@ -1,0 +1,99 @@
+.searchInputBox {
+    width: 100%;
+    display: -webkit-box !important;
+    display: -moz-box !important;
+    display: -ms-flexbox !important;
+    display: -webkit-flex !important;
+    display: flex !important;
+    position: relative !important;
+    width: 100% !important;
+    height: 72px !important;
+    background-color: #ffffff !important;
+    border: 1px solid #ebebeb !important;
+    border-radius: 4px !important;
+    box-shadow: 0 2px 4px rgb(92, 92, 92) !important;
+    z-index: 1 !important;
+    justify-content: space-between;
+    flex: 1;
+}
+
+/* right border */
+.rightBorder {
+    border-right: 1px solid rgb(184, 184, 184);
+    margin-right: 5px;
+    flex: 1;
+}
+
+.bedroomsNumber,
+.dateRang {
+    width: auto;
+    font-family: inherit;
+    font-size: 100%;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    position: relative;
+}
+
+/* button  */
+.commonButton {
+    height: 70px !important;
+
+    webkit-box-align: center !important;
+    -ms-flex-align: center !important;
+    background-color: #ffffff !important;
+    border: 0px !important;
+    border-radius: 4px 0 0 4px !important;
+    display: -webkit-box !important;
+    display: -moz-box !important;
+    display: -ms-flexbox !important;
+    display: -webkit-flex !important;
+    display: flex !important;
+    outline: none !important;
+    margin-left: 24px !important;
+    padding-right: 24px !important;
+    text-align: left !important;
+    -webkit-align-items: center !important;
+    align-items: center !important;
+}
+.bedroomsButton {
+    /* width: 100px !important; */
+}
+.bedroomsButton:hover {
+    background-color: rgb(92, 92, 92);
+}
+
+/* 客房滑块 */
+.sliderBox,
+.dateRangShowBox,
+.priceRangShowBox,
+.commonShowBox {
+    display: none;
+    padding: 30px;
+    width: 190%;
+    position: absolute;
+
+    top: 80px;
+    background-color: #fff;
+    box-shadow: 0px 1px 2px rgb(0 0 0 / 8%), 0px 4px 12px rgb(0 0 0 / 5%) !important;
+    justify-content: center;
+    align-items: center;
+}
+
+/* 日期范围 */
+.dateRang {
+    flex: 1;
+}
+
+/* 日期范围按钮 */
+.dateRangButton {
+    width: auto;
+}
+
+.dateRangShowBox {
+}
+/* 评论、价格 */
+.priceRangShowBox,
+.commentbutton {
+    width: 100% !important;
+}

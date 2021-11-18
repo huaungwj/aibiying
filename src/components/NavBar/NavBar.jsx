@@ -1,4 +1,4 @@
-import React, {/*  useEffect, useState  */} from "react";
+import React, { useState } from "react";
 import NavBarStyle from "./Navbar.module.css";
 import { withRouter, Link } from "react-router-dom";
 import logo from "../../assets/logo.jpg";
@@ -6,7 +6,11 @@ import { SearchOutlined, MenuOutlined } from "@ant-design/icons";
 import PropTypes from "prop-types";
 
 function NavBar(props) {
-    
+    const [isShowSelect, setIsShowSelect] = useState(false);
+
+    const onChangeSelectStatus = (status) => {
+        setIsShowSelect(status);
+    };
 
     return (
         <div className={NavBarStyle.navBarContainer}>
@@ -33,14 +37,18 @@ function NavBar(props) {
                 <ul>
                     <li
                         className={
-                            props.location.pathname === "/" ? NavBarStyle.liActive : ""
+                            props.location.pathname === "/"
+                                ? NavBarStyle.liActive
+                                : ""
                         }
                     >
                         <Link to="/">首页</Link>
                     </li>
                     <li
                         className={
-                            /^\/house/.test(props.location.pathname) ? NavBarStyle.liActive : ""
+                            /^\/house/.test(props.location.pathname)
+                                ? NavBarStyle.liActive
+                                : ""
                         }
                     >
                         <Link to="/house">房源</Link>
