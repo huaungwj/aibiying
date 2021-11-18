@@ -95,13 +95,13 @@ export const ApiUpdateHouse = (id, data) => {
 
 export const ApiPublishHouse = (id) => {
     return axios.put("/listings/publish/" + id, {
-        availability: {}
+        availability: {},
     });
-}
+};
 
 export const ApiUnPublishHouse = (id) => {
     return axios.put("/listings/unpublish/" + id);
-}
+};
 
 /**
  *
@@ -114,7 +114,22 @@ export const ApiUnPublishHouse = (id) => {
  * @returns
  */
 export const ApiBooking = (listingid, data) => {
-    return axios.post("/bookings/new/" + listingid, data)
+    return axios.post("/bookings/new/" + listingid, data);
+};
+
+/**
+ * booking
+ *
+ */
+export const ApiGetBookings = () => {
+    return axios.get("/bookings");
+};
+
+/**
+ * 接收出租
+ */
+export const ApiAcceptBooking = (bookingid) => {
+    return axios.put("/bookings/accept/" + bookingid);
 };
 
 export const ApiGetBookings = () => {
@@ -131,7 +146,7 @@ export const ApiAddComment = (listingid, bookingid, review) => {
 export default {
     Login,
     Register,
-    Logout
+    Logout,
 };
 
 export * from "./types";
