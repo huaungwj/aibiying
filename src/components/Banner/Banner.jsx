@@ -1,17 +1,38 @@
 import { Button } from "@material-ui/core";
-import React, { useState } from "react";
+import React, { useState, useCallback, useEffect } from "react";
 import SearchOutlinedIcon from "@material-ui/icons/SearchOutlined";
 import RemoveIcon from "@material-ui/icons/Remove";
 import AddIcon from "@material-ui/icons/Add";
 import Search from "../Search/Search";
 import { Link } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import * as SearchAction from "../../store/actions/search";
 
 function Banner() {
     const [showSearch, setShowSearch] = useState(false);
     const [showGuests, setShowGuests] = useState(false);
-    const [adultsCounter, setAdultsCounter] = useState(0);
-    const [childrenCounter, setChildrenCounter] = useState(0);
-    const [infantCounter, setInfantCounter] = useState(0);
+    const [bedroomsNumber, setBedroomsNumber] = useState(0);
+    const [price, setPrice] = useState(0);
+    const [scoreNumber, setScoreNumber] = useState(0);
+    const dispatch = useDispatch();
+    // const SearchState = useSelector(state => state.search);useSelector
+
+    // price change
+    const priceChange = useCallback((e) => {
+        if (!e.target.value.trim()) return setPrice(0);
+        console.log(e.target.value);
+        setPrice(parseInt(e.target.value));
+    });
+    // params change
+    useEffect(() => {
+        dispatch(SearchAction.setSearchParams({
+            bedroomsNumber,
+            price,
+            scoreNumber,
+            keyword: "",
+        }))
+        // console.log(SearchState);
+    }, [bedroomsNumber, price, scoreNumber])
 
     return (
         <>
@@ -64,13 +85,13 @@ function Banner() {
                             }}
                         >
                             <h2 className="text-sm font-bold text-gray-700">
-                                Guests
+                                other
                             </h2>
                             <span className="text-gray-600 text-sm">
-                                {adultsCounter +
+                                {/* {adultsCounter +
                                     childrenCounter +
-                                    infantCounter}{" "}
-                                Guests
+                                    infantCounter}{" "} */}
+                                screen
                             </span>
                         </div>
                         <Link to="/search">
@@ -83,9 +104,9 @@ function Banner() {
                         <div className="absolute bg-white right-60 rounded-xl shadow-xl p-8">
                             <div className="flex space-x-14 items-center border-b-2 border-gray-100 py-3">
                                 <div>
-                                    <h1 className="font-bold">Adults</h1>
+                                    <h1 className="font-bold">bedroom</h1>
                                     <span className="text-sm">
-                                        Ages 13 or above
+                                        Please select the number of bedrooms
                                     </span>
                                 </div>
 
@@ -93,25 +114,25 @@ function Banner() {
                                     <RemoveIcon
                                         className="text-gray-600 border border-gray-300 rounded-full cursor-pointer p-1"
                                         onClick={() => {
-                                            if (adultsCounter > 0) {
-                                                setAdultsCounter(
-                                                    adultsCounter - 1
+                                            if (bedroomsNumber > 0) {
+                                                setBedroomsNumber(
+                                                    bedroomsNumber - 1
                                                 );
                                             } else {
-                                                setAdultsCounter(0);
+                                                setBedroomsNumber(0);
                                             }
                                         }}
                                     />
-                                    <span>{adultsCounter}</span>
+                                    <span>{bedroomsNumber}</span>
                                     <AddIcon
                                         className="text-gray-600 border border-gray-300 rounded-full cursor-pointer p-1"
                                         onClick={() => {
-                                            if (adultsCounter < 5) {
-                                                setAdultsCounter(
-                                                    adultsCounter + 1
+                                            if (bedroomsNumber < 5) {
+                                                setBedroomsNumber(
+                                                    bedroomsNumber + 1
                                                 );
                                             } else {
-                                                setAdultsCounter(5);
+                                                setBedroomsNumber(5);
                                             }
                                         }}
                                     />
@@ -120,33 +141,36 @@ function Banner() {
 
                             <div className="flex flex-grow flex-row items-center border-b-2 border-gray-100 py-3">
                                 <div className="w-full">
-                                    <h1 className="font-bold">Children</h1>
-                                    <span className="text-sm">Ages 2-12</span>
+                                    <h1 className="font-bold">Price</h1>
+                                    <span className="text-sm">
+                                        Please choose the price you can accept
+                                    </span>
                                 </div>
 
                                 <div className="flex items-center flex-row justify-end space-x-3">
                                     <RemoveIcon
                                         className="text-gray-600 border border-gray-300 rounded-full cursor-pointer p-1"
                                         onClick={() => {
-                                            if (childrenCounter > 0) {
-                                                setChildrenCounter(
-                                                    childrenCounter - 1
-                                                );
+                                            if (price > 0) {
+                                                setPrice(price - 200);
                                             } else {
-                                                setChildrenCounter(0);
+                                                setPrice(0);
                                             }
                                         }}
                                     />
-                                    <span>{childrenCounter}</span>
+                                    <input
+                                        style={{
+                                            width: "50px",
+                                            textAlign: "center",
+                                        }}
+                                        value={price}
+                                        onChange={priceChange}
+                                    />
                                     <AddIcon
                                         className="text-gray-600 border border-gray-300 rounded-full cursor-pointer p-1"
                                         onClick={() => {
-                                            if (childrenCounter < 5) {
-                                                setChildrenCounter(
-                                                    childrenCounter + 1
-                                                );
-                                            } else {
-                                                setChildrenCounter(5);
+                                            if (price >= 0) {
+                                                setPrice(price + 200);
                                             }
                                         }}
                                     />
@@ -155,32 +179,31 @@ function Banner() {
 
                             <div className="flex space-x-14 items-center border-b-2 border-gray-100 py-3">
                                 <div className="w-full">
-                                    <h1 className="font-bold">Infants</h1>
-                                    <span className="text-sm">Under 2</span>
+                                    <h1 className="font-bold">score</h1>
+                                    <span className="text-sm">
+                                        Please select a score that you can
+                                        accept
+                                    </span>
                                 </div>
                                 <div className="flex items-center space-x-3">
                                     <RemoveIcon
                                         className="text-gray-600 border border-gray-300 rounded-full cursor-pointer p-1"
                                         onClick={() => {
-                                            if (infantCounter > 0) {
-                                                setInfantCounter(
-                                                    infantCounter - 1
-                                                );
+                                            if (scoreNumber > 0) {
+                                                setScoreNumber(scoreNumber - 1);
                                             } else {
-                                                setInfantCounter(0);
+                                                setScoreNumber(0);
                                             }
                                         }}
                                     />
-                                    <span>{infantCounter}</span>
+                                    <span>{scoreNumber}</span>
                                     <AddIcon
                                         className="text-gray-600 border border-gray-300 rounded-full cursor-pointer p-1"
                                         onClick={() => {
-                                            if (infantCounter < 5) {
-                                                setInfantCounter(
-                                                    infantCounter + 1
-                                                );
+                                            if (scoreNumber < 5) {
+                                                setScoreNumber(scoreNumber + 1);
                                             } else {
-                                                setInfantCounter(5);
+                                                setScoreNumber(5);
                                             }
                                         }}
                                     />
