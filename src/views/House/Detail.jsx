@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useState } from "react";
 import { useHistory, useParams, withRouter } from "react-router";
 import PropTypes from "prop-types";
-import { Divider, Tag, Space, Rate, Row, Col, Input, Button, DatePicker, message, Comment } from "antd";
+import { Divider, Tag, Space, Rate, Row, Col, Input, Button, DatePicker, message, Comment, Image } from "antd";
 import moment from "moment";
 
 import { ApiAddComment, ApiBooking, ApiGetBookings, ApiGetHouse } from "../../api";
@@ -203,6 +203,8 @@ const HouseDetail = () => {
 
         </div>
         <div className={HouseClass["detail-price"]}>
+            <Image src={houseInfo.thumbnail} width={300} style={{ marginBottom: "10px" }} />
+
             <div className={HouseClass["detail-price-content"]}>
                 <span>${houseInfo.price}</span>/night
             </div>
