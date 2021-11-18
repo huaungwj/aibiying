@@ -15,6 +15,9 @@ export default function UserReducers(state = userInitialState, action) {
         console.log(payload);
         newState.visible = payload;
         break;
+    case Types.UserInfoClearn:
+        newState.email = ""
+        break;
     default:
         break;
     }

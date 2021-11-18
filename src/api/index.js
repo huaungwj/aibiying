@@ -24,6 +24,14 @@ export const Register = (registerInfo) => {
 };
 
 /**
+ *
+ * @param {*} houseInfo
+ * @returns
+ */
+export const Logout = () => {
+    return axios.post("/user/auth/logout");
+};
+/**
  * @param {object} houseInfo
  * @param {string} houseInfo.address
  * @param {string} houseInfo.amenities
@@ -49,8 +57,8 @@ function transformHouseData(houseInfo) {
             address: houseInfo.address,
             houseType: houseInfo.houseType,
         },
-        metadata: {}
-    }
+        metadata: {},
+    };
 }
 
 /**
@@ -75,7 +83,7 @@ export const ApiGetHouses = () => {
 
 export const ApiHousesDel = (id) => {
     return axios.delete("/listings/" + id);
-}
+};
 
 export const ApiGetHouse = (id) => {
     return axios.get("/listings/" + id);
@@ -83,11 +91,12 @@ export const ApiGetHouse = (id) => {
 
 export const ApiUpdateHouse = (id, data) => {
     return axios.put("/listings/" + id, transformHouseData(data));
-}
+};
 
 export default {
     Login,
     Register,
+    Logout
 };
 
 export * from "./types";

@@ -26,6 +26,7 @@ function User(props) {
                 token: res.token,
             };
             dispatch(UserAction.setUserInfo(data));
+            message.success("Login succeeded")
             localStorage.setItem(StorageTokenName, JSON.stringify(data));
             onCancel();
         };

@@ -35,6 +35,8 @@ body::-webkit-scrollbar-thumb {
     font-size: 1.8rem !important;
 }
 .banner {
+    z-index: 1;
+    position: relative;
     background: linear-gradient(#00000000, #000000ad),
         url("./assets/banner.png");
     height: 90vh;
