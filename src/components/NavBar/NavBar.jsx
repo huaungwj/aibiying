@@ -22,6 +22,7 @@ function NavBar(props) {
 
     // logout
     const logout = () => {
+        console.log("123");
         // 清除localstorage 和 redux
         Api.Logout()
             .then(() => {
@@ -83,8 +84,14 @@ function NavBar(props) {
                     >
                         <Link to="/house">房源</Link>
                     </li>
-                    <li>
-                        <Link to="/">预定管理</Link>
+                    <li
+                        className={
+                            /^\/booking/.test(props.location.pathname)
+                                ? NavBarStyle.liActive
+                                : ""
+                        }
+                    >
+                        <Link to="/booking">预定管理</Link>
                     </li>
                 </ul>
                 {/* 个人中心 */}
@@ -119,7 +126,6 @@ function NavBar(props) {
                         className={NavBarStyle.personalSelect}
                         style={{
                             display: isShowSelect ? "flex" : "none",
-                            zIndex: 99,
                         }}
                     >
                         <ul>
