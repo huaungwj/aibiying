@@ -86,6 +86,7 @@ const HouseAdd = () => {
 
     const renderUploadList = useCallback((originNode, file, fileList, actions) => {
         let src;
+        console.log(file);
         if (file.thumbnail) {
             src = file.thumbnail;
         } else {
@@ -98,6 +99,9 @@ const HouseAdd = () => {
         const query = qs.parse(location.search, {
             ignoreQueryPrefix: true,
         });
+        if (!query.id) {
+            return
+        }
         ApiGetHouse(query.id).then(res => {
             let data = res.listing;
             if (data.owner !== userInfo.email) {

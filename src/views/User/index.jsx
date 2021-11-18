@@ -1,4 +1,4 @@
-import { useCallback, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { Modal, Form, Input, Divider, message } from "antd";
 import { useDispatch, useSelector } from "react-redux";
 
@@ -43,6 +43,10 @@ function User(props) {
     const onCancel = useCallback(() => {
         dispatch(UserAction.setUserVisiable(false));
     }, []);
+
+    useEffect(() => {
+        console.log(UserState);
+    })
 
     return <>
         <Modal
