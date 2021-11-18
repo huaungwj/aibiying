@@ -17,6 +17,9 @@ export default function UserReducers(state = userInitialState, action) {
     case Types.UserVisiable:
         newState.visible = payload;
         break;
+    case Types.UserInfoClearn:
+        newState.email = ""
+        break;
     default:
         break;
     }

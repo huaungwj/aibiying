@@ -234,13 +234,14 @@
 
 /* personalSelect */
 .personalSelect {
+    pointer-events: none;
     display: none;
     position: absolute;
     top: 80px;
     left: -75px;
     height: auto;
     background-color: #fff;
-    width: 150px;
+    width: auto;
     border-radius: 15px;
     z-index: 999;
     border: 1px solid transparent !important;
@@ -257,7 +258,8 @@
 .personalSelect > ul > li {
     box-sizing: border-box;
     width: 100%;
-    padding-left: 10px;
+    padding-left: 30px;
+    padding-right: 30px;
     border-radius: 15px;
     font-size: 16px;
     line-height: 48px;

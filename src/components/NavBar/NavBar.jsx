@@ -4,16 +4,41 @@ import { withRouter, Link } from "react-router-dom";
 import logo from "../../assets/logo.jpg";
 import { SearchOutlined, MenuOutlined } from "@ant-design/icons";
 import PropTypes from "prop-types";
-import { useDispatch } from "react-redux";
-import { setUserVisiable } from "../../store/actions/user";
+import { useDispatch, useSelector } from "react-redux";
+import { setUserVisiable, clearnUserInfo } from "../../store/actions/user";
+import { setSearchParams } from "../../store/actions/search";
+import { message } from "antd";
+import Api from "../../api";
 
 function NavBar(props) {
-    const [isShowSelect, setIsShowSelect] = useState(false)
+    const [isShowSelect, setIsShowSelect] = useState(false);
+    const [keyword, setKeyWord] = useState("");
     const dispatch = useDispatch();
+    const user = useSelector((state) => state.user);
 
     const onChangeSelectStatus = (status) => {
-        setIsShowSelect(status)
-    }
+        setIsShowSelect(status);
+    };
+
+    // logout
+    const logout = () => {
+        // 清除localstorage 和 redux
+        Api.Logout()
+            .then(() => {
+                message.success("Logout succeeded");
+                dispatch(clearnUserInfo());
+                localStorage.removeItem("AirbnbAuthUserInfo");
+            })
+            .catch((err) => {
+                message.error(`${err.response.data.error}.`);
+            });
+    };
+    // input change
+    const changeKeyWord = (e) => {
+        console.log(e.target.value);
+        dispatch(setSearchParams({ keyword }));
+        setKeyWord(e.target.value);
+    };
 
     return (
         <div className={NavBarStyle.navBarContainer}>
@@ -29,6 +54,8 @@ function NavBar(props) {
                     <input
                         className={NavBarStyle.navBarSearchInput}
                         placeholder={"start your search"}
+                        value={keyword}
+                        onChange={changeKeyWord}
                     />
                     <div className={NavBarStyle.navBarSearchSubmit}>
                         <SearchOutlined />
@@ -90,20 +117,24 @@ function NavBar(props) {
                     {/* 下拉列表 */}
                     <div
                         className={NavBarStyle.personalSelect}
-                        style={{ display: isShowSelect ? "flex" : "none" }}
+                        style={{
+                            display: isShowSelect ? "flex" : "none",
+                            zIndex: 99,
+                        }}
                     >
                         <ul>
                             <li
                                 className={NavBarStyle.PersonalLiFirst}
                                 onClick={(e) => {
                                     e.nativeEvent.stopImmediatePropagation();
-                                    dispatch(setUserVisiable(true))
+                                    if (user.email) return;
+                                    dispatch(setUserVisiable(true));
                                     console.log(123);
                                 }}
                             >
-                                Login
+                                {user.email ? user.email : "Login"}
                             </li>
-                            <li>sign up</li>
+                            <li onClick={logout}>logout</li>
                         </ul>
                     </div>
                 </div>

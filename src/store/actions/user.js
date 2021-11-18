@@ -26,3 +26,9 @@ export const setUserVisiable = (visiable) => {
         payload: visiable
     }
 }
+
+export const clearnUserInfo = () => {
+    return {
+        type: Types.UserInfoClearn,
+    }
+}
