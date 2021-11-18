@@ -1,12 +1,13 @@
 import { useCallback, useEffect, useState } from "react";
 import { useHistory, useParams } from "react-router";
 import PropTypes from "prop-types";
-import { Divider, Tag, Space, Rate, Row, Col, Input, Button, DatePicker, message } from "antd";
+import { Divider, Tag, Space, Rate, Row, Col, Input, Button, DatePicker, message, Comment } from "antd";
 import moment from "moment";
 
-import { ApiBooking, ApiGetHouse } from "../../api";
+import { ApiAddComment, ApiBooking, ApiGetBookings, ApiGetHouse } from "../../api";
 
 import HouseClass from "./house.module.css";
+import { useSelector } from "react-redux";
 
 const TagLists = (props) => {
     return <Space style={{ display: "flex", marginTop: "10px" }}>
@@ -21,14 +22,18 @@ TagLists.propTypes = {
 };
 
 const HouseDetail = () => {
+    const [stars, setStars] = useState(0);
+    const [commentText, setComment] = useState("");
     const currentTime = moment();
     const params = useParams();
     const history = useHistory();
+    const userInfo = useSelector(state => state.user);
     const [selectDays, changeDays] = useState({
         day: 0,
         start: 0,
         end: 0,
     });
+    const [rateStars, setRateStars] = useState(0);
 
     const [houseInfo, setHouseInfo] = useState({
         address: {
@@ -41,7 +46,14 @@ const HouseDetail = () => {
     const getData = () => {
         ApiGetHouse(params.id).then(res => {
             // console.log(res.listing);
-            setHouseInfo(res.listing);
+            const data = res.listing;
+            setHouseInfo(data);
+
+            const stars = data.reviews.reduce((num, item) => {
+                return parseFloat(item.stars) + num;
+            }, 0);
+            console.log((stars / data.reviews.length) || 0);
+            setRateStars((stars / data.reviews.length) || 0)
         }).catch(() => {
             history.back();
         })
@@ -96,7 +108,11 @@ const HouseDetail = () => {
             </h3>
 
             <Space align="center">
-                <Rate disabled defaultValue={0} allowHalf />
+                <Rate
+                    disabled
+                    allowHalf
+                    value={rateStars}
+                />
                 {houseInfo.reviews.length} Comment
             </Space>
 
@@ -104,24 +120,93 @@ const HouseDetail = () => {
 
             <Row className="add-comment" justify="space-around" align="middle">
                 <Col span={16}>
-                    <Input.TextArea rows={6} placeholder="Tell" />
+                    <Input.TextArea
+                        rows={6}
+                        placeholder="Tell"
+                        value={commentText}
+                        onChange={(e) => {
+                            setComment(e.target.value);
+                        }}
+                    />
                 </Col>
                 <Col span={6}>
                     <Row justify="center">
-                        <Rate allowHalf />
+                        <Rate
+                            allowHalf
+                            onChange={(stars) => {
+                                setStars(stars);
+                            }}
+                        />
                         <Divider />
                         <span>Are you satisfied ?</span>
                     </Row>
                 </Col>
+
+                <Col span={23} style={{ marginTop: "20px" }}>
+                    <Button
+                        block
+                        type="primary"
+                        onClick={() => {
+                            if (stars === 0 || !commentText) {
+                                message.error("Please fill in relevant evaluation information")
+                                return;
+                            }
+                            ApiGetBookings().then(res => {
+                                const data = res.bookings;
+                                const booking = data.find(item => {
+                                    if (item.listingId === params.id && houseInfo.owner === userInfo.email) {
+                                        return true
+                                    }
+                                    return item.listingId === params.id && item.owner === userInfo.email;
+                                });
+                                if (booking) {
+                                    // console.log(commentText, stars);
+                                    ApiAddComment(params.id, booking.id, {
+                                        comment: commentText,
+                                        stars,
+                                        email: userInfo.email,
+                                        time: moment().format("YYYY-MM-DD")
+                                    }).then(res => {
+                                        message.success("Published Comment successfully !")
+                                        setComment("");
+                                        setStars(0);
+                                        getData();
+                                    }).catch(err => {
+                                        message.error(err.response.data.error);
+                                    });
+                                } else {
+                                    message.error("You must make a reservation before you can comment");
+                                }
+                            }).catch(err => {
+                                // console.log(err);
+                                message.error(err.response.data.error);
+                            });
+                        }}
+                    >
+                        Publish Comment
+                    </Button>
+                </Col>
             </Row>
             <Divider />
+
+            {houseInfo.reviews.map((item, index) => {
+                return <Comment
+                    key={index}
+                    author={<span style={{ fontSize: "16px" }}>{item.email}</span>}
+                    content={<>
+                        <p>{item.time}</p>
+                        <p style={{ fontSize: "16px" }}>{item.comment}</p>
+                    </>}
+                />
+            })}
+
         </div>
         <div className={HouseClass["detail-price"]}>
             <div className={HouseClass["detail-price-content"]}>
                 <span>${houseInfo.price}</span>/night
             </div>
 
-            <Rate disabled defaultValue={0} allowHalf style={{ marginBottom: "10px" }} />
+            <Rate disabled value={rateStars} allowHalf style={{ marginBottom: "10px" }} />
 
             <DatePicker.RangePicker
                 disabledDate={disabledDate}

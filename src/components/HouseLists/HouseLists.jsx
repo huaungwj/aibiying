@@ -39,9 +39,6 @@ const HouseLists = (props) => {
                     <IconText icon={<MessageOutlined />} text={house.reviews.length} key="message" />,
                     <Rate disabled key="rate" defaultValue={5} allowHalf />
                 ]}
-                onClick={() => {
-                    history.push(`/house/detail/${house.id}`)
-                }}
             >
                 <h2 style={{ fontSize: "24px" }}>{house.title}</h2>
                 <p>
@@ -60,6 +57,13 @@ const HouseLists = (props) => {
                     Bathrooms: {address.bathrooms || "bathrooms"}
                 </p>
                 <Space>
+                    <Button
+                        onClick={() => {
+                            history.push(`/house/detail/${house.id}`)
+                        }}
+                    >
+                        View
+                    </Button>
                     <Button
                         type="primary"
                         onClick={(e) => {

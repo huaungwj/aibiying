@@ -117,6 +117,17 @@ export const ApiBooking = (listingid, data) => {
     return axios.post("/bookings/new/" + listingid, data)
 };
 
+export const ApiGetBookings = () => {
+    return axios.get("/bookings")
+}
+
+export const ApiAddComment = (listingid, bookingid, review) => {
+    const url = "/listings/" + listingid + "/review/" + bookingid;
+    return axios.put(url, {
+        review
+    });
+}
+
 export default {
     Login,
     Register,

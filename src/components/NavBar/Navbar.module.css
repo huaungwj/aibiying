@@ -234,7 +234,7 @@
 
 /* personalSelect */
 .personalSelect {
-    pointer-events: none;
+    /* pointer-events: none; */
     display: none;
     position: absolute;
     top: 80px;

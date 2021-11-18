@@ -41,6 +41,11 @@ function User(props) {
         });
     }, [isRegister]);
 
+    const initialState = {
+        email: "1835773652@qq.com",
+        password: "123456",
+    };
+
     const onCancel = useCallback(() => {
         dispatch(UserAction.setUserVisiable(false));
     }, []);
@@ -54,7 +59,7 @@ function User(props) {
             onCancel={onCancel}
         >
             <h2>Welcome to Airbnb</h2>
-            <Form ref={form} onFinish={onFinish}>
+            <Form ref={form} onFinish={onFinish} initialValues={initialState}>
                 {
                     isRegister && <Form.Item
                         className={Style["input-control-container"]}
