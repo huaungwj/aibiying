@@ -1,4 +1,5 @@
 import PropTypes from "prop-types";
+import { useHistory } from "react-router";
 import { Button, Space, List, Image, Tag, Rate, Popconfirm, message } from "antd";
 import { MessageOutlined } from "@ant-design/icons"
 
@@ -13,18 +14,21 @@ const IconText = ({ icon, text }) => {
 
 IconText.propTypes = {
     icon: PropTypes.object,
-    text: PropTypes.string,
+    text: PropTypes.number,
 }
 
 const HouseLists = (props) => {
+    const history = useHistory()
     return <List
-        dataSource={props.dataSource}
+        dataSource={props.dataSource || []}
         itemLayout="vertical"
         renderItem={house => {
             const address = house.address;
-            const deleteHouse = () => {
+            const deleteHouse = (e) => {
+                e.stopPropagation();
                 ApiHousesDel(house.id).then(res => {
-                    message.success("deleted")
+                    message.success("deleted");
+                    props.onDelete && props.onDelete();
                 }).catch(err => {
                     message.error(err.response.data.error);
                 });
@@ -35,8 +39,11 @@ const HouseLists = (props) => {
                     <IconText icon={<MessageOutlined />} text={house.reviews.length} key="message" />,
                     <Rate disabled key="rate" defaultValue={5} allowHalf />
                 ]}
+                onClick={() => {
+                    history.push(`/house/detail/${house.id}`)
+                }}
             >
-                <h2>{house.title}</h2>
+                <h2 style={{ fontSize: "24px" }}>{house.title}</h2>
                 <p>
                     Address: {address.address || "house address"}
                 </p>
@@ -55,7 +62,8 @@ const HouseLists = (props) => {
                 <Space>
                     <Button
                         type="primary"
-                        onClick={() => {
+                        onClick={(e) => {
+                            e.stopPropagation();
                             history.push("/house/add?id=" + house.id);
                         }}
                     >
@@ -69,6 +77,7 @@ const HouseLists = (props) => {
                     >
                         <Button type="danger">Delete</Button>
                     </Popconfirm>
+                    {props.action && props.action(house)}
                 </Space>
             </List.Item>
         }}
@@ -76,7 +85,9 @@ const HouseLists = (props) => {
 };
 
 HouseLists.propTypes = {
-    dataSource: PropTypes.object
+    dataSource: PropTypes.array,
+    onDelete: PropTypes.func,
+    action: PropTypes.func,
 };
 
 export default HouseLists;

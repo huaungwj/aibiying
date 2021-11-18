@@ -1,11 +1,15 @@
 import { useCallback, useEffect, useState } from "react";
-import { Button, Space, Divider } from "antd";
+import { Button, Space, Divider, Popconfirm, message } from "antd";
 import { useHistory, withRouter } from "react-router";
 import { useSelector } from "react-redux";
 
 import HouseClass from "./house.module.css";
-import { ApiGetHouses } from "../../api";
+import { ApiGetHouse, ApiGetHouses, ApiPublishHouse, ApiUnPublishHouse } from "../../api";
 import HouseLists from "../../components/HouseLists/HouseLists";
+
+function stopPropagation(e) {
+    e.stopPropagation();
+}
 
 const HouseList = () => {
     const history = useHistory();
@@ -16,11 +20,24 @@ const HouseList = () => {
         history.push("/house/add");
     }, [])
 
-    useEffect(() => {
+    const getData = () => {
         ApiGetHouses().then(res => {
             // console.log(res);
-            setHousesState(res.listings.filter(item => item.owner === userInfo.email));
+            const data = res.listings.filter(item => item.owner === userInfo.email);
+            Promise.all(data.map(item => {
+                return ApiGetHouse(item.id);
+            })).then(res => {
+                res.forEach((item, index) => {
+                    item = item.listing;
+                    data[index].published = item.published;
+                });
+                setHousesState(data);
+            });
         });
+    }
+
+    useEffect(() => {
+        getData();
     }, [userInfo]);
 
     return <div className={`aby_container ${HouseClass["house-list"]}`}>
@@ -29,7 +46,45 @@ const HouseList = () => {
             <Button onClick={toHouseAdd}>Add House</Button>
         </Space>
         <Divider></Divider>
-        <HouseLists dataSource={houses} />
+        <HouseLists
+            dataSource={houses}
+            onDelete={getData}
+            action={(house) => {
+                // console.log(house);
+                if (house.published) {
+                    return <Popconfirm
+                        title={`Do you unpublish ${house.title} ?`}
+                        okText="confirm"
+                        onCancel="cancel"
+                        onConfirm={(e) => {
+                            stopPropagation(e);
+                            ApiUnPublishHouse(house.id).then(res => {
+                                message.success(`unpublish ${house.title}`);
+                                getData();
+                            }).catch(err => {
+                                message.error(err.response.data.error);
+                            })
+                        }}
+                    >
+                        <Button type="danger" onClick={stopPropagation}>Unpublish</Button>
+                    </Popconfirm>
+                }
+                return <Button
+                    type="text"
+                    onClick={(e) => {
+                        stopPropagation(e);
+                        ApiPublishHouse(house.id).then(res => {
+                            message.success("publish " + house.title);
+                            getData();
+                        }).catch(err => {
+                            message.error(err.response.data.error);
+                        })
+                    }}
+                >
+                    Publish
+                </Button>
+            }}
+        />
         {/* {houses.map(house => {
             return <List key={house.title}>
                 <List.Item

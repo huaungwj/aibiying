@@ -4,9 +4,12 @@ import { withRouter, Link } from "react-router-dom";
 import logo from "../../assets/logo.jpg";
 import { SearchOutlined, MenuOutlined } from "@ant-design/icons";
 import PropTypes from "prop-types";
+import { useDispatch } from "react-redux";
+import { setUserVisiable } from "../../store/actions/user";
 
 function NavBar(props) {
     const [isShowSelect, setIsShowSelect] = useState(false)
+    const dispatch = useDispatch();
 
     const onChangeSelectStatus = (status) => {
         setIsShowSelect(status)
@@ -37,14 +40,18 @@ function NavBar(props) {
                 <ul>
                     <li
                         className={
-                            props.location.pathname === "/" ? NavBarStyle.liActive : ""
+                            props.location.pathname === "/"
+                                ? NavBarStyle.liActive
+                                : ""
                         }
                     >
                         <Link to="/">首页</Link>
                     </li>
                     <li
                         className={
-                            /^\/house/.test(props.location.pathname) ? NavBarStyle.liActive : ""
+                            /^\/house/.test(props.location.pathname)
+                                ? NavBarStyle.liActive
+                                : ""
                         }
                     >
                         <Link to="/house">房源</Link>
@@ -90,6 +97,7 @@ function NavBar(props) {
                                 className={NavBarStyle.PersonalLiFirst}
                                 onClick={(e) => {
                                     e.nativeEvent.stopImmediatePropagation();
+                                    dispatch(setUserVisiable(true))
                                     console.log(123);
                                 }}
                             >

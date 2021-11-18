@@ -85,6 +85,30 @@ export const ApiUpdateHouse = (id, data) => {
     return axios.put("/listings/" + id, transformHouseData(data));
 }
 
+export const ApiPublishHouse = (id) => {
+    return axios.put("/listings/publish/" + id, {
+        availability: {}
+    });
+}
+
+export const ApiUnPublishHouse = (id) => {
+    return axios.put("/listings/unpublish/" + id);
+}
+
+/**
+ *
+ * @param {number} listingid
+ * @param {object} data
+ * @param {object} data.dateRange
+ * @param {string} data.dateRange.start
+ * @param {string} data.dateRange.end
+ * @param {number|string} data.totalPrice
+ * @returns
+ */
+export const ApiBooking = (listingid, data) => {
+    return axios.post("/bookings/new/" + listingid, data)
+};
+
 export default {
     Login,
     Register,

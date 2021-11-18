@@ -1,4 +1,13 @@
-import { Divider, Form, Input, Upload, Image, Button, Space, message } from "antd";
+import {
+    Divider,
+    Form,
+    Input,
+    Upload,
+    Image,
+    Button,
+    Space,
+    message,
+} from "antd";
 import { useCallback, useEffect, useRef, useState } from "react";
 import qs from "qs";
 
@@ -58,7 +67,7 @@ const formItem = [
         placeholder: "What type of bed is it",
         rules: [{ required: true, message: "Bedtypes is Required" }],
         textarea: true,
-        rows: 6
+        rows: 6,
     },
     {
         label: "Amenities",
@@ -66,14 +75,14 @@ const formItem = [
         placeholder: "Some entertainment facilities ?",
         rules: [{ required: true, message: "Amenities is Required" }],
         textarea: true,
-        rows: 6
+        rows: 6,
     },
-]
+];
 
 const HouseAdd = () => {
     const beforeUpload = useCallback(() => false, []);
     const [fileList, setFileList] = useState([]);
-    const userInfo = useSelector(state => state.user);
+    const userInfo = useSelector((state) => state.user);
     const form = useRef();
     const history = useHistory();
     const location = useLocation();
@@ -86,7 +95,6 @@ const HouseAdd = () => {
 
     const renderUploadList = useCallback((originNode, file, fileList, actions) => {
         let src;
-        console.log(file);
         if (file.thumbnail) {
             src = file.thumbnail;
         } else {
@@ -128,63 +136,70 @@ const HouseAdd = () => {
     //     return obj;
     // }, {})
 
-    const handleFinish = useCallback((value) => {
-        const handleHouse = () => {
-            (id ? ApiUpdateHouse(id, value) : ApiHouseAdd(value)).then(res => {
-                message.success(id ? "success update" : "success add");
-                form.current.resetFields();
-                setFileList([]);
-                if (id) {
-                    history.push("/house/add");
-                }
-            }).catch(err => {
-                message.error(err.response.data.error)
-            });
-        };
+    const handleFinish = useCallback(
+        (value) => {
+            const handleHouse = () => {
+                (id ? ApiUpdateHouse(id, value) : ApiHouseAdd(value))
+                    .then((res) => {
+                        message.success(id ? "success update" : "success add");
+                        form.current.resetFields();
+                        setFileList([]);
+                        if (id) {
+                            history.push("/house/add");
+                        }
+                    })
+                    .catch((err) => {
+                        message.error(err.response.data.error);
+                    });
+            };
 
-        if (fileList.length === 0 && !value.thumbnail) {
-            message.error("You must upload thumbnail");
-            return;
-        }
-        const file = fileList[0].originFileObj;
-        if (fileList[0].thumbnail) {
-            handleHouse();
-        } else {
-            const fileReader = new FileReader();
-            fileReader.readAsDataURL(file, "base64");
-            fileReader.onload = (e) => {
-                value.thumbnail = e.target.result;
-                handleHouse();
+            if (fileList.length === 0 && !value.thumbnail) {
+                message.error("You must upload thumbnail");
+                return;
             }
-        }
-    }, [fileList, id]);
+            const file = fileList[0].originFileObj;
+            if (fileList[0].thumbnail) {
+                handleHouse();
+            } else {
+                const fileReader = new FileReader();
+                fileReader.readAsDataURL(file, "base64");
+                fileReader.onload = (e) => {
+                    value.thumbnail = e.target.result;
+                    handleHouse();
+                };
+            }
+        },
+        [fileList, id]
+    );
 
-    return <div className={`aby_container ${HouseClass["house-add"]}`}>
-        <h1 className={`${HouseClass["house-title"]}`}>House New</h1>
-        <Divider></Divider>
-        <Form
-            labelCol={{ span: 2 }}
-            onFinish={handleFinish} ref={form}
-        >
-            {formItem.map(itemConf => {
-                return <Form.Item
-                    label={itemConf.label}
-                    name={itemConf.name}
-                    rules={itemConf.rules}
-                    key={itemConf.name}
-                >
-                    {
-                        itemConf.textarea
-                            ? <Input.TextArea
-                                rows={itemConf.rows}
-                                placeholder={itemConf.placeholder}
-                            />
-                            : <Input placeholder={itemConf.placeholder} />
-                    }
-                </Form.Item>
-            })}
-            {
-            /* <Form.Item
+    return (
+        <div className={`aby_container ${HouseClass["house-add"]}`}>
+            <h1 className={`${HouseClass["house-title"]}`}>House New</h1>
+            <Divider></Divider>
+            <Form labelCol={{ span: 2 }} onFinish={handleFinish} ref={form}>
+                {formItem.map((itemConf) => {
+                    return (
+                        <Form.Item
+                            label={itemConf.label}
+                            name={itemConf.name}
+                            rules={itemConf.rules}
+                            key={itemConf.name}
+                        >
+                            {itemConf.textarea
+                                ? (
+                                    <Input.TextArea
+                                        rows={itemConf.rows}
+                                        placeholder={itemConf.placeholder}
+                                    />
+                                )
+                                : (
+                                    <Input placeholder={itemConf.placeholder} />
+                                )
+                            }
+                        </Form.Item>
+                    );
+                })}
+                {/* <Form.Item
                 label="Title"
                 name="title"
                 rules={[{ required: true, message: "Title is Required" }]}
@@ -223,30 +238,34 @@ const HouseAdd = () => {
             <Form.Item label="Amenities" name="amenities">
                 <Input.TextArea placeholder="Some entertainment facilities ?" rows={6} />
             </Form.Item>
-            */
-            }
+            */}
 
-            <Form.Item label="Thumbnail" name="thumbnail">
-                <Upload
-                    beforeUpload={beforeUpload}
-                    fileList={fileList}
-                    onChange={handleChange}
-                    itemRender={renderUploadList}
-                    maxCount={1}
-                    className={`${HouseClass["house-upload"]}`}
-                >
-                    <Button type="primary" style={{ marginBottom: "10px" }}>Click Upload Image</Button>
-                </Upload>
-            </Form.Item>
+                <Form.Item label="Thumbnail" name="thumbnail">
+                    <Upload
+                        beforeUpload={beforeUpload}
+                        fileList={fileList}
+                        onChange={handleChange}
+                        itemRender={renderUploadList}
+                        maxCount={1}
+                        className={`${HouseClass["house-upload"]}`}
+                    >
+                        <Button type="primary" style={{ marginBottom: "10px" }}>
+                            Click Upload Image
+                        </Button>
+                    </Upload>
+                </Form.Item>
 
-            <Form.Item wrapperCol={{ offset: 2 }}>
-                <Space>
-                    <Button type="primary" htmlType="submit">Save</Button>
-                    <Button htmlType="reset">Cancel</Button>
-                </Space>
-            </Form.Item>
-        </Form>
-    </div>;
+                <Form.Item wrapperCol={{ offset: 2 }}>
+                    <Space>
+                        <Button type="primary" htmlType="submit">
+                            Save
+                        </Button>
+                        <Button htmlType="reset">Cancel</Button>
+                    </Space>
+                </Form.Item>
+            </Form>
+        </div>
+    );
 };
 
 export default withRouter(HouseAdd);

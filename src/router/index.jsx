@@ -7,16 +7,16 @@ import NavBar from "../components/NavBar/NavBar";
 import routes from "../router/config";
 import User from "../views/User";
 import store from "../store";
-import { StorageTokenName } from "../api";
-import * as UserAction from "../store/actions/user";
+// import { StorageTokenName } from "../api";
+// import * as UserAction from "../store/actions/user";
 
 // console.log(routes);
 
 export default function RouteConfigExample() {
     useEffect(() => {
         try {
-            const userInfo = JSON.parse(localStorage.getItem(StorageTokenName));
-            store.dispatch(UserAction.setUserInfo(userInfo));
+            // const userInfo = JSON.parse(localStorage.getItem(StorageTokenName));
+            // store.dispatch(UserAction.setUserInfo(userInfo));
         } catch (error) {
             console.log("Invalid userinfo. You must login");
         }

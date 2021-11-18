@@ -22,3 +22,31 @@ div.house-add {
     font-weight: 600;
     color: #333;
 }
+
+div.detail-container {
+    display: flex;
+    align-items: flex-start;
+}
+
+.detail-content {
+    flex: 1;
+}
+
+.detail-price {
+    width: 30%;
+    margin-left: 6%;
+    border: 1px solid #ddd;
+    padding: 10px;
+}
+
+.detail-price-content {
+    display: flex;
+    align-items: flex-end;
+    margin-bottom: 10px;
+}
+
+.detail-price-content span {
+    font-size: 16px;
+    color: #ff385c;
+    font-weight: 600;
+}

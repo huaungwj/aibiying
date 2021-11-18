@@ -4,6 +4,7 @@ import App from "./router/index";
 // import User from "./views/User/index";
 import "antd/dist/antd.min.css";
 import "./index.css";
+import "./style.css";
 
 ReactDOM.render(
     <React.Fragment>
