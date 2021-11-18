@@ -1,4 +1,4 @@
-import React, {/*  useEffect, useState  */} from "react";
+import { useState } from "react";
 import NavBarStyle from "./Navbar.module.css";
 import { withRouter, Link } from "react-router-dom";
 import logo from "../../assets/logo.jpg";
@@ -6,7 +6,11 @@ import { SearchOutlined, MenuOutlined } from "@ant-design/icons";
 import PropTypes from "prop-types";
 
 function NavBar(props) {
-    
+    const [isShowSelect, setIsShowSelect] = useState(false)
+
+    const onChangeSelectStatus = (status) => {
+        setIsShowSelect(status)
+    }
 
     return (
         <div className={NavBarStyle.navBarContainer}>

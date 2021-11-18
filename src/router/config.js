@@ -1,5 +1,6 @@
 import Home from "../views/Home/Home";
-import HouseList from "../views/House/List"
+import HouseList from "../views/House/List";
+import HouseAdd from "../views/House/Add";
 
 const routes = [
     {
@@ -14,7 +15,11 @@ const routes = [
             {
                 path: "/list",
                 component: HouseList,
-            }
+            },
+            {
+                path: "/add",
+                component: HouseAdd,
+            },
         ],
     }
 ];

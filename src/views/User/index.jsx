@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useRef, useState } from "react";
+import { useCallback, useRef, useState } from "react";
 import { Modal, Form, Input, Divider, message } from "antd";
 import { useDispatch, useSelector } from "react-redux";
 
@@ -42,15 +42,6 @@ function User(props) {
 
     const onCancel = useCallback(() => {
         dispatch(UserAction.setUserVisiable(false));
-    }, []);
-
-    useEffect(() => {
-        try {
-            const userInfo = JSON.parse(localStorage.getItem(StorageTokenName));
-            dispatch(UserAction.setUserInfo(userInfo));
-        } catch (error) {
-            console.log("Invalid userinfo. You must login");
-        }
     }, []);
 
     return <>
