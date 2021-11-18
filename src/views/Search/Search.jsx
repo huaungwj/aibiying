@@ -156,10 +156,11 @@ function Search() {
                             return (
                                 <SearchResult
                                     key={items.id}
+                                    id={items.id}
                                     image={
                                         items.thumbnail ? items.thumbnail : ""
                                     }
-                                    location={
+                                    address={
                                         items.address?.address
                                             ? items.address?.address
                                             : ""

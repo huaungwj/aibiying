@@ -1,15 +1,18 @@
 import LocationOnIcon from "@material-ui/icons/LocationOn";
 import PropTypes from "prop-types";
+import { useHistory, withRouter } from "react-router";
 
 function SearchResult({
     image,
-    location,
+    address,
     category,
     title,
     description,
     price,
     totalPrice,
+    id
 }) {
+    const history = useHistory();
     return (
         <>
             {/* search item  */}
@@ -29,7 +32,7 @@ function SearchResult({
                     <div className="px-3">
                         <div className="pt-3">
                             <LocationOnIcon className="text-gray-400 w-5 h-5" />
-                            <span className="text-sm">{location}</span>
+                            <span className="text-sm">{address}</span>
                             <h2 className="font-semibold text-2xl mb-1">
                                 {title}
                             </h2>
@@ -40,7 +43,12 @@ function SearchResult({
                                 HouseType:  {category}
                             </h3>
                             <div className="flex flex-row items-end justify-start md:h-20 lg:h-20 xl:h-20">
-                                <span className="my-5 bg-red-500 text-white text-sm p-2 rounded-full shadow-xl">
+                                <span
+                                    className="my-5 bg-red-500 text-white text-sm p-2 rounded-full shadow-xl"
+                                    onClick={() => {
+                                        history.push(`/house/detail/${id}`)
+                                    }}
+                                >
                                     ViewDetails
                                 </span>
                             </div>
@@ -67,12 +75,13 @@ function SearchResult({
 
 SearchResult.propTypes = {
     image: PropTypes.string.isRequired,
-    location: PropTypes.string.isRequired,
+    address: PropTypes.string.isRequired,
     category: PropTypes.string.isRequired,
     title: PropTypes.string.isRequired,
     description: PropTypes.string.isRequired,
     price: PropTypes.string.isRequired,
     totalPrice: PropTypes.string.isRequired,
+    id: PropTypes.string.isRequired
 };
 
-export default SearchResult;
+export default withRouter(SearchResult);
