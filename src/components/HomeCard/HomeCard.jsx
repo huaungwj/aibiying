@@ -1,4 +1,3 @@
-import React from "react";
 import Propstypes from "prop-types";
 
 function HomeCard({ cardImage, cardTitle }) {

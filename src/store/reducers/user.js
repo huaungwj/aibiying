@@ -1,7 +1,7 @@
 import * as Types from "../types";
 
 const userInitialState = {
-    visiable: true,
+    visible: false,
 };
 
 export default function UserReducers(state = userInitialState, action) {
@@ -12,10 +12,11 @@ export default function UserReducers(state = userInitialState, action) {
         newState = { ...payload };
         break;
     case Types.UserVisiable:
-        newState.visiable = payload.visiable;
+        console.log(payload);
+        newState.visible = payload;
         break;
     default:
         break;
     }
-    return Object.assign({}, newState, state);
+    return Object.assign({}, state, newState);
 }

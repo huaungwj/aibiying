@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { Button } from "@material-ui/core";
 import SearchData from "../../tools/SearchData.json";
 import SearchResult from "../../components/SearchResult/SearchResult";

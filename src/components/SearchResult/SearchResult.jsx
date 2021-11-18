@@ -1,4 +1,3 @@
-import React from "react";
 import LocationOnIcon from "@material-ui/icons/LocationOn";
 import FavoriteBorderIcon from "@material-ui/icons/FavoriteBorder";
 import PropTypes from "prop-types";

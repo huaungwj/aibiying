@@ -1,4 +1,5 @@
 import PropTypes from "prop-types";
+import { useHistory } from "react-router";
 import { Button, Space, List, Image, Tag, Rate, Popconfirm, message } from "antd";
 import { MessageOutlined } from "@ant-design/icons"
 
@@ -17,6 +18,7 @@ IconText.propTypes = {
 }
 
 const HouseLists = (props) => {
+    const history = useHistory()
     return <List
         dataSource={props.dataSource}
         itemLayout="vertical"

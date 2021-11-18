@@ -1,4 +1,4 @@
-import React, { useEffect } from "react"; // useState
+import { useEffect } from "react"; // useState
 import HotelCardStyle from "./HotelCard.module.css";
 
 /**

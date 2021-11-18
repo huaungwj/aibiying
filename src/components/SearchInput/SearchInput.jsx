@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import SearchInputStyle from "./SearchInput.module.css";
 import { Slider, InputNumber, DatePicker } from "antd"; // InputNumber, DatePicker
 import {
