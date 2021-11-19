@@ -1,7 +1,7 @@
 import { useState } from "react";
 import NavBarStyle from "./Navbar.module.css";
 import { withRouter, Link, useHistory } from "react-router-dom";
-import logo from "../../assets/logo.jpg";
+// import logo from "../../assets/logo.jpg";
 import { SearchOutlined, MenuOutlined } from "@ant-design/icons";
 import PropTypes from "prop-types";
 import { useDispatch, useSelector } from "react-redux";
@@ -53,8 +53,8 @@ function NavBar(props) {
         <div className={NavBarStyle.navBarContainer}>
             {/* logo */}
             <div className={NavBarStyle.navBarLogo}>
-                <Link to="/">
-                    <img src={logo} />
+                <Link to="/" style={{ fontSize: "24px", color: "#ff385c" }}>
+                    AriBrB
                 </Link>
             </div>
             {/* 搜索框 */}
