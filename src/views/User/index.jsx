@@ -35,10 +35,10 @@ function User(props) {
                 Api.Register(value)
                     .then(successFn)
                     .catch((err) => {
-                        console.log(err);
-                        // message.error(
-                        //     `${err.response.data.error}. You Can to Login`
-                        // );
+                        // console.log(err);
+                        message.error(
+                            `${err}. You Can to Login`
+                        );
                     });
                 return;
             }
@@ -46,7 +46,7 @@ function User(props) {
                 .then(successFn)
                 .catch((err) => {
                     message.error(
-                        `${err.response.data.error}. You Can to Register`
+                        `${err}. You Can to Register`
                     );
                 });
         },

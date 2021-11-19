@@ -20,7 +20,7 @@ function Banner() {
     // price change
     const priceChange = useCallback((e) => {
         if (!e.target.value.trim()) return setPrice(0);
-        console.log(e.target.value);
+        // console.log(e.target.value);
         setPrice(parseInt(e.target.value));
     });
     // params change

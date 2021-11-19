@@ -52,7 +52,7 @@ const HouseDetail = () => {
             const stars = data.reviews.reduce((num, item) => {
                 return parseFloat(item.stars) + num;
             }, 0);
-            console.log((stars / data.reviews.length) || 0);
+            // console.log((stars / data.reviews.length) || 0);
             setRateStars((stars / data.reviews.length) || 0)
         }).catch(() => {
             history.push("/");
@@ -173,7 +173,9 @@ const HouseDetail = () => {
                                         setStars(0);
                                         getData();
                                     }).catch(err => {
+                                        // console.log(err);
                                         message.error(err.response.data.error);
+                                        // message.error(err);
                                     });
                                 } else {
                                     message.error("You must make a reservation before you can comment");
@@ -239,7 +241,7 @@ const HouseDetail = () => {
                     }).then(res => {
                         message.success("bookinged")
                     }).catch(err => {
-                        message.error(err.response.data.error);
+                        message.error(err);
                     })
                 }}
             >

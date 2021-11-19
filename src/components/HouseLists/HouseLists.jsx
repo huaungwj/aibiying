@@ -30,7 +30,7 @@ const HouseLists = (props) => {
                     message.success("deleted");
                     props.onDelete && props.onDelete();
                 }).catch(err => {
-                    message.error(err.response.data.error);
+                    message.error(err);
                 });
             };
             return <List.Item

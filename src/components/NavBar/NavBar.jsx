@@ -15,7 +15,7 @@ function NavBar(props) {
     const [keyword, setKeyWord] = useState("");
     const dispatch = useDispatch();
     const user = useSelector((state) => state.user);
-    const search = useSelector((state) => state.search);
+    // const search = useSelector((state) => state.search);
     const history = useHistory();
 
     const onChangeSelectStatus = (status) => {
@@ -24,7 +24,7 @@ function NavBar(props) {
 
     // logout
     const logout = () => {
-        console.log("123");
+        // console.log("123");
         // 清除localstorage 和 redux
         Api.Logout()
             .then(() => {
@@ -33,7 +33,7 @@ function NavBar(props) {
                 localStorage.removeItem("AirbnbAuthUserInfo");
             })
             .catch((err) => {
-                message.error(`${err.response.data.error}.`);
+                message.error(`${err}.`);
             });
     };
     // input change
@@ -45,7 +45,7 @@ function NavBar(props) {
     // link search submit
     const submitClick = () => {
         // link
-        console.log(search)
+        // console.log(search)
         history.push("/search");
     };
 
@@ -150,7 +150,7 @@ function NavBar(props) {
                                     e.nativeEvent.stopImmediatePropagation();
                                     if (user.email) return;
                                     dispatch(setUserVisiable(true));
-                                    console.log(123);
+                                    // console.log(123);
                                 }}
                             >
                                 {user.email ? user.email : "Login"}

@@ -17,7 +17,7 @@ exports[`should take a snapshot 1`] = `
         My Bookings
       </h1>
       <p>
-        Please manage your listing information!  
+        Please manage your listing information! 
       </p>
       <div
         class="row card-deck"

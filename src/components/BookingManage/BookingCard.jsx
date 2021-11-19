@@ -29,13 +29,13 @@ const BookingCard = ({ booking }) => {
     const [bookingDetail, setBookDetail] = useState();
 
     useEffect(() => {
-        console.log(booking);
+        // console.log(booking);
         getDetailBooking();
     }, []);
 
     const getDetailBooking = () => {
         ApiGetHouse(booking.listingId).then((res) => {
-            console.log(res, bookingDetail);
+            // console.log(res, bookingDetail);
             setBookDetail(res.listing);
         });
     };
@@ -44,11 +44,11 @@ const BookingCard = ({ booking }) => {
         if (status) {
             ApiAcceptBooking(booking.id)
                 .then((res) => {
-                    console.log(res);
+                    // console.log(res);
                 })
                 .catch((err) => {
                     // console.log(err);
-                    message.error(`${err.response.data.error} `);
+                    message.error(`${err} `);
                 });
         }
     };
@@ -122,7 +122,7 @@ BookingCard.propTypes = {
         startAt: PropsTypes.string,
         endAt: PropsTypes.string,
         days: PropsTypes.string,
-        totalPrice: PropsTypes.string,
+        totalPrice: PropsTypes.number,
         createdAt: PropsTypes.string,
     }),
 };

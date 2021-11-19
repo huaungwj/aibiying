@@ -21,10 +21,9 @@ const HouseList = () => {
     }, []);
 
     const getData = useCallback(() => {
-        const req = ApiGetHouses();
-        req.then(res => {
+        ApiGetHouses().then(res => {
             const data = res.listings.filter(item => item.owner === userInfo.email);
-            // console.log(res.listings);
+            // console.log(res.listings, userInfo);
             const promises = Promise.all(data.map(item => {
                 return ApiGetHouse(item.id);
             }));
@@ -35,18 +34,12 @@ const HouseList = () => {
                 });
                 setHousesState(data);
             });
-        }).catch(err => {
-            console.log("house list cancel", err);
-        });
-        return req;
-    }, [userInfo.email])
+        })
+    }, [userInfo])
 
     useEffect(() => {
-        const req = getData();
-        return () => {
-            req.source && req.source.cancel("cancel");
-        }
-    }, [userInfo.email]);
+        getData();
+    }, [userInfo]);
 
     return <div className={`aby_container ${HouseClass["house-list"]}`}>
         <h1 className={HouseClass["house-title"]}>House List</h1>
@@ -70,7 +63,7 @@ const HouseList = () => {
                                 message.success(`unpublish ${house.title}`);
                                 getData();
                             }).catch(err => {
-                                message.error(err.response.data.error);
+                                message.error(err);
                             })
                         }}
                     >
@@ -85,7 +78,7 @@ const HouseList = () => {
                             message.success("publish " + house.title);
                             getData();
                         }).catch(err => {
-                            message.error(err.response.data.error);
+                            message.error(err);
                         })
                     }}
                 >

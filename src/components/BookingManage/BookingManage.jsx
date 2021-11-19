@@ -12,8 +12,10 @@ function BookingManage(props) {
             data-testid="bookingBox"
         >
             <section id="userBookings">
-                <h1 className="page-title" data-testid="page-title">My Bookings</h1>
-                <p>Please manage your listing information!  </p>
+                <h1 className="page-title" data-testid="page-title">
+                    My Bookings
+                </h1>
+                <p>Please manage your listing information! </p>
                 <div
                     className="row card-deck"
                     style={{
@@ -25,12 +27,7 @@ function BookingManage(props) {
                 >
                     {bookings?.map((booking) => {
                         return (
-                            <>
-                                <BookingCard
-                                    key={booking.id}
-                                    booking={booking}
-                                />
-                            </>
+                            <BookingCard key={booking.id} booking={booking} />
                         );
                     })}
                 </div>
@@ -39,9 +36,9 @@ function BookingManage(props) {
                         You have no bookings created go to rentals section and
                         book your place today.
                         <Link
-                            style={{ marginLeft: "10px" }}
+                            style={{ marginLeft: "10px", color: "red" }}
                             className="btn btn-bwm"
-                            to="/rentals"
+                            to="/"
                         >
                             Available Rental
                         </Link>

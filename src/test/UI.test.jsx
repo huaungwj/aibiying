@@ -89,41 +89,4 @@ it("UI test", async() => {
     });
 
     fireEvent.click(app.getByText("Save"));
-
-    // to house list
-    // fireEvent.click(app.getByTestId("House"));
-    // console.log(houseTitleText, email);
-
-    // expect(await app.findByText(houseTitleText));
-
-    // fireEvent.click(app.getByText("Publish"))
-
-    // fireEvent.click(await app.findByText("Unpiblish"));
-    // fireEvent.click(app.getByText("Confirm"));
-
-    // expect(await app.getByText("Publish")).toBeInTheDocument();
-
-    // logout
-    // fireEvent.click(app.getByTestId("user-avater"));
-    // fireEvent.click(app.getByText("logout"));
-
-    // // login
-    // fireEvent.click(await app.getByText("login"));
-
-    // fireEvent.change(app.getByPlaceholderText("Email"), {
-    //     target: {
-    //         value: email,
-    //     }
-    // });
-
-    // fireEvent.change(app.getByPlaceholderText("Password"), {
-    //     target: {
-    //         value: Pwd,
-    //     }
-    // });
-
-    // go house list look at the data
-    // fireEvent.click(app.getByTestId("House"));
-
-    // await app.findByText(houseTitleText);
 });

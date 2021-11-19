@@ -20,7 +20,7 @@ function Booking() {
             return;
         }
         ApiGetBookings().then((res) => {
-            console.log(res.bookings, bookings);
+            // console.log(res.bookings, bookings);
             setBookings(res.bookings);
         });
     };

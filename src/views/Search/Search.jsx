@@ -23,13 +23,13 @@ function Search() {
     };
 
     const filteringKeyWord = (keyword, data) => {
-        const filterPlace = data.filter(item => {
-            console.log(item.title.match(keyword))
-            return item.title.match(keyword)
-        })
+        const filterPlace = data.filter((item) => {
+            // console.log(item.title.indexOf(keyword));
+            return item.title.indexOf(keyword) >= 0;
+        });
 
-        return filterPlace
-    }
+        return filterPlace;
+    };
 
     // number type filter
     const filterNumber = (name, number, data, isAddress) => {
@@ -47,8 +47,12 @@ function Search() {
     useEffect(() => {
         // fiiter
         getData();
-        console.log(SearchState);
+        // console.log(SearchState);
     }, []);
+
+    useEffect(() => {
+        getData()
+    }, [SearchState.searchParam.keyword]);
 
     // nowPage FilterCondition
     const nowPageFilter = (data) => {
@@ -76,8 +80,11 @@ function Search() {
 
         // filter keyword
         if (SearchState.searchParam.keyword.trim()) {
-            console.log(SearchState.searchParam.keyword);
-            filteringKeyWord(SearchState.searchParam.keyword, data)
+            // console.log(SearchState.searchParam.keyword);
+            filterResult = filteringKeyWord(
+                SearchState.searchParam.keyword,
+                data
+            );
         }
 
         // no filter scrope
@@ -98,7 +105,7 @@ function Search() {
                 setHotelNumber(filterResult.length);
             })
             .catch((err) => {
-                message.error(err.response.data.error);
+                message.error(err);
             });
     };
 

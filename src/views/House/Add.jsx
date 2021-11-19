@@ -79,13 +79,11 @@ const formItem = [
     },
 ];
 
-const defaultThumbnail = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAUAAAAFCAYAAACNbyblAAAAHElEQVQI12P4//8/w38GIAXDIBKE0DHxgljNBAAO9TXL0Y4OHwAAAABJRU5ErkJggg=="
+// const defaultThumbnail = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAUAAAAFCAYAAACNbyblAAAAHElEQVQI12P4//8/w38GIAXDIBKE0DHxgljNBAAO9TXL0Y4OHwAAAABJRU5ErkJggg=="
 
 const HouseAdd = () => {
     const beforeUpload = useCallback(() => false, []);
-    const [fileList, setFileList] = useState([{
-        thumbnail: defaultThumbnail,
-    }]);
+    const [fileList, setFileList] = useState([]);
     const userInfo = useSelector((state) => state.user);
     const form = useRef();
     const history = useHistory();
@@ -123,11 +121,11 @@ const HouseAdd = () => {
                 title: data.title,
                 price: data.price,
                 ...data.address,
-                thumbnail: data.thumbnail || defaultThumbnail,
+                thumbnail: data.thumbnail,
             };
 
             setFileList([{
-                thumbnail: data.thumbnail || defaultThumbnail,
+                thumbnail: data.thumbnail,
             }]);
 
             setId(query.id);
@@ -146,19 +144,19 @@ const HouseAdd = () => {
         (value) => {
             const handleHouse = () => {
                 value.thumbnail = value.thumbnail || fileList[0].thumbnail;
-                console.log(id, value);
+                // console.log(id, value);
                 (id ? ApiUpdateHouse(id, value) : ApiHouseAdd(value))
                     .then((res) => {
                         message.success(id ? "success update" : "success add");
                         form.current?.resetFields();
-                        // setFileList([]);;
+                        setFileList([]);
                         if (id) {
                             history.push("/house/add");
                         }
                     })
                     .catch((err) => {
                         console.dir(err);
-                        // message.error(err.response.data.error);
+                        // message.error(err);
                     });
             };
 
