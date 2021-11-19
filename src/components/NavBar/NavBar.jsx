@@ -54,7 +54,7 @@ function NavBar(props) {
             {/* logo */}
             <div className={NavBarStyle.navBarLogo}>
                 <Link to="/" style={{ fontSize: "24px", color: "#ff385c" }}>
-                    AriBrB
+                    AirBrB
                 </Link>
             </div>
             {/* 搜索框 */}
