@@ -62,16 +62,17 @@ exports[`should take a snapshot 1`] = `
           <a
             href="/"
           >
-            首页
+            Home
           </a>
         </li>
         <li
           class=""
         >
           <a
+            data-testid="House"
             href="/house"
           >
-            房源
+            House
           </a>
         </li>
         <li
@@ -80,14 +81,16 @@ exports[`should take a snapshot 1`] = `
           <a
             href="/booking"
           >
-            预定管理
+            Booking
           </a>
         </li>
       </ul>
       <div
         class="personalCenter"
       >
-        <button>
+        <button
+          data-testid="user-avater"
+        >
           <span
             aria-label="menu"
             class="anticon anticon-menu"
