@@ -17,7 +17,6 @@
     "react-scripts": "4.0.0",
     "redux": "^4.1.2"
   },
-  
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
@@ -48,6 +47,7 @@
     "@testing-library/react": "^11.1.0",
     "@testing-library/user-event": "^12.1.10",
     "babel-plugin-import": "^1.13.3",
+    "enzyme": "^3.11.0",
     "eslint": "^7.11.0",
     "eslint-config-standard": "^16.0.2",
     "eslint-plugin-import": "^2.22.1",
