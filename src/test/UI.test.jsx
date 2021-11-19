@@ -11,7 +11,7 @@ const houseTitleText = new Date().getTime() + "newHouseTitle";
 afterEach(cleanup);
 
 it("UI test", async() => {
-    const app = render(<App history={ createMemoryHistory() } />);
+    const app = render(<App />);
     fireEvent.click(app.getByTestId("user-avater"));
 
     fireEvent.click(app.getByText("Login"));

@@ -156,12 +156,15 @@ function User(props) {
                         </Form.Item>
                     )}
 
-                    <button className={Style["login-button"]}>Continue</button>
+                    <button
+                        className={Style["login-button"]}
+                    >Continue</button>
                 </Form>
                 <Divider plain>or</Divider>
                 <button
                     className={Style["login-button-continue"]}
                     onClick={changeLoginType}
+                    data-testid="continue-btn"
                 >
                     {isRegister
                         ? "Continue with Login"
