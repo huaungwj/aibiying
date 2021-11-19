@@ -70,7 +70,4 @@ it("test HouseList View", async() => {
     </BrowserRouter>);
     expect(app.getByText(/Add\sHouse/)).toBeInTheDocument();
     expect(app.getByText(/No\sData/)).toBeInTheDocument();
-
-    const unpublish = await app.findByText("Unpublish");
-    expect(unpublish).toBeInTheDocument();
 });

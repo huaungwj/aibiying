@@ -1,6 +1,5 @@
 
 import { render, fireEvent, cleanup } from "@testing-library/react";
-import { createMemoryHistory } from "history";
 
 import App from "../router";
 
