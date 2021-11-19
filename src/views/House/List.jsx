@@ -21,7 +21,7 @@ const HouseList = () => {
     }, []);
 
     const getData = useCallback(() => {
-        let req = ApiGetHouses();
+        const req = ApiGetHouses();
         req.then(res => {
             const data = res.listings.filter(item => item.owner === userInfo.email);
             // console.log(res.listings);
@@ -42,7 +42,7 @@ const HouseList = () => {
     }, [userInfo.email])
 
     useEffect(() => {
-        let req = getData();
+        const req = getData();
         return () => {
             req.source && req.source.cancel("cancel");
         }

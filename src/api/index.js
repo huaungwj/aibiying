@@ -78,8 +78,8 @@ export const ApiHouseAdd = (houseInfo) => {
 };
 
 export const ApiGetHouses = () => {
-    let source = CancelToken.source();
-    let request = axios.get("/listings", {
+    const source = CancelToken.source();
+    const request = axios.get("/listings", {
         cancelToken: source.token
     });
     request.source = source;

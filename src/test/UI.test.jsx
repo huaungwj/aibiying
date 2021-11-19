@@ -1,5 +1,5 @@
 
-import { render, fireEvent, cleanup, act } from "@testing-library/react";
+import { render, fireEvent, cleanup } from "@testing-library/react";
 
 import App from "../router";
 
