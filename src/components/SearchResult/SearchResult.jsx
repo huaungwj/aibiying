@@ -81,7 +81,7 @@ SearchResult.propTypes = {
     description: PropTypes.string.isRequired,
     price: PropTypes.string.isRequired,
     totalPrice: PropTypes.string.isRequired,
-    id: PropTypes.string.isRequired
+    id: PropTypes.number.isRequired
 };
 
 export default withRouter(SearchResult);

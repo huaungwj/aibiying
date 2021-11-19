@@ -1,6 +1,6 @@
 import { useState } from "react";
 import NavBarStyle from "./Navbar.module.css";
-import { withRouter, Link } from "react-router-dom";
+import { withRouter, Link, useHistory } from "react-router-dom";
 import logo from "../../assets/logo.jpg";
 import { SearchOutlined, MenuOutlined } from "@ant-design/icons";
 import PropTypes from "prop-types";
@@ -15,6 +15,8 @@ function NavBar(props) {
     const [keyword, setKeyWord] = useState("");
     const dispatch = useDispatch();
     const user = useSelector((state) => state.user);
+    const search = useSelector((state) => state.search);
+    const history = useHistory();
 
     const onChangeSelectStatus = (status) => {
         setIsShowSelect(status);
@@ -36,9 +38,15 @@ function NavBar(props) {
     };
     // input change
     const changeKeyWord = (e) => {
-        console.log(e.target.value);
-        dispatch(setSearchParams({ keyword }));
+        // console.log(e.target.value);
+        dispatch(setSearchParams({ keyword: e.target.value }));
         setKeyWord(e.target.value);
+    };
+    // link search submit
+    const submitClick = () => {
+        // link
+        console.log(search)
+        history.push("/search");
     };
 
     return (
@@ -58,7 +66,12 @@ function NavBar(props) {
                         value={keyword}
                         onChange={changeKeyWord}
                     />
-                    <div className={NavBarStyle.navBarSearchSubmit}>
+                    <div
+                        className={NavBarStyle.navBarSearchSubmit}
+                        onClick={() => {
+                            submitClick();
+                        }}
+                    >
                         <SearchOutlined />
                     </div>
                 </button>
@@ -82,7 +95,9 @@ function NavBar(props) {
                                 : ""
                         }
                     >
-                        <Link to="/house" data-testid="House">House</Link>
+                        <Link to="/house" data-testid="House">
+                            House
+                        </Link>
                     </li>
                     <li
                         className={

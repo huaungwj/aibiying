@@ -22,6 +22,15 @@ function Search() {
         setData(filterPlace);
     };
 
+    const filteringKeyWord = (keyword, data) => {
+        const filterPlace = data.filter(item => {
+            console.log(item.title.match(keyword))
+            return item.title.match(keyword)
+        })
+
+        return filterPlace
+    }
+
     // number type filter
     const filterNumber = (name, number, data, isAddress) => {
         const filterPlace = data.filter((item) => {
@@ -63,6 +72,12 @@ function Search() {
                 data,
                 "bedrooms"
             );
+        }
+
+        // filter keyword
+        if (SearchState.searchParam.keyword.trim()) {
+            console.log(SearchState.searchParam.keyword);
+            filteringKeyWord(SearchState.searchParam.keyword, data)
         }
 
         // no filter scrope
