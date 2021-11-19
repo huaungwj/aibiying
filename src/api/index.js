@@ -1,5 +1,5 @@
 import axios from "./axios";
-
+const CancelToken = axios.CancelToken;
 /**
  *
  * @param {object} loginInfo
@@ -78,7 +78,12 @@ export const ApiHouseAdd = (houseInfo) => {
 };
 
 export const ApiGetHouses = () => {
-    return axios.get("/listings");
+    let source = CancelToken.source();
+    let request = axios.get("/listings", {
+        cancelToken: source.token
+    });
+    request.source = source;
+    return request;
 };
 
 export const ApiHousesDel = (id) => {

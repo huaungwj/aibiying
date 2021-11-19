@@ -79,10 +79,12 @@ const formItem = [
     },
 ];
 
+const defaultThumbnail = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAUAAAAFCAYAAACNbyblAAAAHElEQVQI12P4//8/w38GIAXDIBKE0DHxgljNBAAO9TXL0Y4OHwAAAABJRU5ErkJggg=="
+
 const HouseAdd = () => {
     const beforeUpload = useCallback(() => false, []);
     const [fileList, setFileList] = useState([{
-        thumbnail: "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAUAAAAFCAYAAACNbyblAAAAHElEQVQI12P4//8/w38GIAXDIBKE0DHxgljNBAAO9TXL0Y4OHwAAAABJRU5ErkJggg==",
+        thumbnail: defaultThumbnail,
     }]);
     const userInfo = useSelector((state) => state.user);
     const form = useRef();
@@ -121,11 +123,13 @@ const HouseAdd = () => {
                 title: data.title,
                 price: data.price,
                 ...data.address,
-                thumbnail: data.thumbnail,
+                thumbnail: data.thumbnail || defaultThumbnail,
             };
+
             setFileList([{
-                thumbnail: data.thumbnail,
+                thumbnail: data.thumbnail || defaultThumbnail,
             }]);
+
             setId(query.id);
             form.current.setFieldsValue(data);
         }).catch(() => {
@@ -141,18 +145,20 @@ const HouseAdd = () => {
     const handleFinish = useCallback(
         (value) => {
             const handleHouse = () => {
-                console.log("house new data:", value);
+                value.thumbnail = value.thumbnail || fileList[0].thumbnail;
+                console.log(id, value);
                 (id ? ApiUpdateHouse(id, value) : ApiHouseAdd(value))
                     .then((res) => {
                         message.success(id ? "success update" : "success add");
-                        form.current.resetFields();
-                        setFileList([]);
+                        form.current?.resetFields();
+                        // setFileList([]);;
                         if (id) {
                             history.push("/house/add");
                         }
                     })
                     .catch((err) => {
-                        message.error(err.response.data.error);
+                        console.dir(err);
+                        // message.error(err.response.data.error);
                     });
             };
 
@@ -160,6 +166,7 @@ const HouseAdd = () => {
                 message.error("You must upload thumbnail");
                 return;
             }
+
             const file = fileList[0].originFileObj;
             if (fileList[0].thumbnail) {
                 handleHouse();
@@ -179,7 +186,11 @@ const HouseAdd = () => {
         <div className={`aby_container ${HouseClass["house-add"]}`}>
             <h1 className={`${HouseClass["house-title"]}`}>House New</h1>
             <Divider></Divider>
-            <Form labelCol={{ span: 2 }} onFinish={handleFinish} ref={form}>
+            <Form
+                labelCol={{ span: 2 }}
+                onFinish={handleFinish}
+                ref={form}
+            >
                 {formItem.map((itemConf) => {
                     return (
                         <Form.Item

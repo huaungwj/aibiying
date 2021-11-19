@@ -18,32 +18,35 @@ const HouseList = () => {
 
     const toHouseAdd = useCallback(() => {
         history.push("/house/add");
-    }, [])
+    }, []);
 
     const getData = useCallback(() => {
-        if (!userInfo.email) {
-            return;
-        }
-        ApiGetHouses().then(res => {
+        let req = ApiGetHouses();
+        req.then(res => {
             const data = res.listings.filter(item => item.owner === userInfo.email);
+            // console.log(res.listings);
             const promises = Promise.all(data.map(item => {
                 return ApiGetHouse(item.id);
-            }))
+            }));
             promises.then(res => {
                 res.forEach((item, index) => {
                     item = item.listing;
                     data[index].published = item.published;
                 });
-                // console.log(data);
-                console.log(userInfo);
                 setHousesState(data);
             });
-        })
-    }, [userInfo])
+        }).catch(err => {
+            console.log("house list cancel", err);
+        });
+        return req;
+    }, [userInfo.email])
 
     useEffect(() => {
-        getData();
-    }, [userInfo]);
+        let req = getData();
+        return () => {
+            req.source && req.source.cancel("cancel");
+        }
+    }, [userInfo.email]);
 
     return <div className={`aby_container ${HouseClass["house-list"]}`}>
         <h1 className={HouseClass["house-title"]}>House List</h1>
