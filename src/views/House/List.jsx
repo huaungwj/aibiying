@@ -20,21 +20,26 @@ const HouseList = () => {
         history.push("/house/add");
     }, [])
 
-    const getData = () => {
+    const getData = useCallback(() => {
+        if (!userInfo.email) {
+            return;
+        }
         ApiGetHouses().then(res => {
-            // console.log(res);
             const data = res.listings.filter(item => item.owner === userInfo.email);
-            Promise.all(data.map(item => {
+            const promises = Promise.all(data.map(item => {
                 return ApiGetHouse(item.id);
-            })).then(res => {
+            }))
+            promises.then(res => {
                 res.forEach((item, index) => {
                     item = item.listing;
                     data[index].published = item.published;
                 });
+                // console.log(data);
+                console.log(userInfo);
                 setHousesState(data);
             });
-        });
-    }
+        })
+    }, [userInfo])
 
     useEffect(() => {
         getData();

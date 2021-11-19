@@ -73,7 +73,7 @@ function NavBar(props) {
                                 : ""
                         }
                     >
-                        <Link to="/">首页</Link>
+                        <Link to="/">Home</Link>
                     </li>
                     <li
                         className={
@@ -82,7 +82,7 @@ function NavBar(props) {
                                 : ""
                         }
                     >
-                        <Link to="/house">房源</Link>
+                        <Link to="/house" data-testid="House">House</Link>
                     </li>
                     <li
                         className={
@@ -91,7 +91,7 @@ function NavBar(props) {
                                 : ""
                         }
                     >
-                        <Link to="/booking">预定管理</Link>
+                        <Link to="/booking">Booking</Link>
                     </li>
                 </ul>
                 {/* 个人中心 */}
@@ -101,7 +101,7 @@ function NavBar(props) {
                         onChangeSelectStatus(!isShowSelect, e);
                     }}
                 >
-                    <button>
+                    <button data-testid="user-avater">
                         <MenuOutlined />
                         <svg
                             className={NavBarStyle.personalSvg}

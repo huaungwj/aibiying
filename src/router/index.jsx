@@ -1,8 +1,8 @@
-import { BrowserRouter as Router, Switch, Route, Redirect } from "react-router-dom";
+import { Router, Switch, Route, Redirect } from "react-router-dom";
 import { Provider } from "react-redux";
 import PropTypes from "prop-types";
 import { useEffect } from "react";
-
+import { createBrowserHistory } from "history";
 import NavBar from "../components/NavBar/NavBar";
 import routes from "../router/config";
 import User from "../views/User";
@@ -12,19 +12,19 @@ import store from "../store";
 
 // console.log(routes);
 
-export default function RouteConfigExample() {
+export default function RouteConfigExample(props) {
     useEffect(() => {
         try {
             // const userInfo = JSON.parse(localStorage.getItem(StorageTokenName));
             // store.dispatch(UserAction.setUserInfo(userInfo));
         } catch (error) {
-            console.log("Invalid userinfo. You must login");
+            // console.log("Invalid userinfo. You must login");
         }
     }, []);
 
     return (
         <Provider store={store}>
-            <Router>
+            <Router history={createBrowserHistory()}>
                 <NavBar />
                 <Switch>
                     {routes.map((route, i) => {

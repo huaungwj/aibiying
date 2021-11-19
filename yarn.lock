@@ -2159,6 +2159,31 @@
     "@webassemblyjs/wast-parser" "1.9.0"
     "@xtuc/long" "4.2.2"
 
+"@wojtekmaj/enzyme-adapter-react-17@^0.6.5":
+  "integrity" "sha1-GSXheq6nCJ5+xmx8NeV3Hkm2v34="
+  "resolved" "https://registry.npmmirror.com/@wojtekmaj/enzyme-adapter-react-17/download/@wojtekmaj/enzyme-adapter-react-17-0.6.5.tgz"
+  "version" "0.6.5"
+  dependencies:
+    "@wojtekmaj/enzyme-adapter-utils" "^0.1.1"
+    "enzyme-shallow-equal" "^1.0.0"
+    "has" "^1.0.0"
+    "object.assign" "^4.1.0"
+    "object.values" "^1.1.0"
+    "prop-types" "^15.7.0"
+    "react-is" "^17.0.2"
+    "react-test-renderer" "^17.0.0"
+
+"@wojtekmaj/enzyme-adapter-utils@^0.1.1":
+  "integrity" "sha1-F3c88mRXD7z8DTO7dOQALBfy8ew="
+  "resolved" "https://registry.nlark.com/@wojtekmaj/enzyme-adapter-utils/download/@wojtekmaj/enzyme-adapter-utils-0.1.1.tgz"
+  "version" "0.1.1"
+  dependencies:
+    "function.prototype.name" "^1.1.0"
+    "has" "^1.0.0"
+    "object.assign" "^4.1.0"
+    "object.fromentries" "^2.0.0"
+    "prop-types" "^15.7.0"
+
 "@xtuc/ieee754@^1.2.0":
   "integrity" "sha512-DX8nKgqcGwsc0eJSqYt5lwP4DH5FlHnmuWWBRy7X0NcaGR0ZtuyeESgMwTYVEtxmsNGY+qit4QYT/MIYTOTPeA=="
   "resolved" "https://registry.npmjs.org/@xtuc/ieee754/-/ieee754-1.2.0.tgz"
@@ -4684,7 +4709,7 @@
   "resolved" "https://registry.npmjs.org/entities/-/entities-2.1.0.tgz"
   "version" "2.1.0"
 
-"enzyme-shallow-equal@^1.0.1":
+"enzyme-shallow-equal@^1.0.0", "enzyme-shallow-equal@^1.0.1":
   "integrity" "sha1-uSVsslpfQw+b/gc6hICMHXT87S4="
   "resolved" "https://registry.npmmirror.com/enzyme-shallow-equal/download/enzyme-shallow-equal-1.0.4.tgz"
   "version" "1.0.4"
@@ -4692,7 +4717,7 @@
     "has" "^1.0.3"
     "object-is" "^1.1.2"
 
-"enzyme@^3.11.0":
+"enzyme@^3.0.0", "enzyme@^3.11.0":
   "integrity" "sha1-cdaAxYD+k0n29axsd1vD5rennCg="
   "resolved" "https://registry.nlark.com/enzyme/download/enzyme-3.11.0.tgz"
   "version" "3.11.0"
@@ -5648,7 +5673,7 @@
   "resolved" "https://registry.npmjs.org/function-bind/-/function-bind-1.1.1.tgz"
   "version" "1.1.1"
 
-"function.prototype.name@^1.1.2":
+"function.prototype.name@^1.1.0", "function.prototype.name@^1.1.2":
   "integrity" "sha1-zOBQX+H/uAUD5vnkbMZORqEqliE="
   "resolved" "https://registry.npmmirror.com/function.prototype.name/download/function.prototype.name-1.1.5.tgz"
   "version" "1.1.5"
@@ -8373,7 +8398,7 @@
     "define-properties" "^1.1.3"
     "es-abstract" "^1.19.1"
 
-"object.fromentries@^2.0.5":
+"object.fromentries@^2.0.0", "object.fromentries@^2.0.5":
   "integrity" "sha1-ezeyBRCcIedB5gVyf+iwrV+gglE="
   "resolved" "https://registry.npmmirror.com/object.fromentries/download/object.fromentries-2.0.5.tgz?cache=0&sync_timestamp=1633280929072&other_urls=https%3A%2F%2Fregistry.npmmirror.com%2Fobject.fromentries%2Fdownload%2Fobject.fromentries-2.0.5.tgz"
   "version" "2.0.5"
@@ -9671,7 +9696,7 @@
     "kleur" "^3.0.3"
     "sisteransi" "^1.0.4"
 
-"prop-types@^15.0.0", "prop-types@^15.6.2", "prop-types@^15.7.2", "prop-types@15":
+"prop-types@^15.0.0", "prop-types@^15.6.2", "prop-types@^15.7.0", "prop-types@^15.7.2", "prop-types@15":
   "integrity" "sha1-UsQedbjIfnK52TYOAga5ncv/psU="
   "resolved" "https://registry.npm.taobao.org/prop-types/download/prop-types-15.7.2.tgz?cache=0&sync_timestamp=1615984425557&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2Fprop-types%2Fdownload%2Fprop-types-15.7.2.tgz"
   "version" "15.7.2"
@@ -10234,7 +10259,7 @@
     "strip-ansi" "6.0.0"
     "text-table" "0.2.0"
 
-"react-dom@*", "react-dom@^16.8.0 || ^17.0.0", "react-dom@^17.0.1", "react-dom@>= 16.9.0", "react-dom@>=16.0.0", "react-dom@>=16.6.0", "react-dom@>=16.9.0":
+"react-dom@*", "react-dom@^16.8.0 || ^17.0.0", "react-dom@^17.0.0-0", "react-dom@^17.0.1", "react-dom@>= 16.9.0", "react-dom@>=16.0.0", "react-dom@>=16.6.0", "react-dom@>=16.9.0":
   "integrity" "sha512-6eV150oJZ9U2t9svnsspTMrWNyHc6chX0KzDeAOXftRa8bNeOKTTfCJ7KorIwenkHd2xqVTBTCZd79yk/lx/Ug=="
   "resolved" "https://registry.npmjs.org/react-dom/-/react-dom-17.0.1.tgz"
   "version" "17.0.1"
@@ -10247,6 +10272,11 @@
   "integrity" "sha512-HvPuUQnLp5H7TouGq3kzBeioJmXms1wHy9EGjz2OURWBp4qZO6AfGEcnxts1D/CbwPLRAgTMPCEgYhA3sEM4vw=="
   "resolved" "https://registry.npmjs.org/react-error-overlay/-/react-error-overlay-6.0.8.tgz"
   "version" "6.0.8"
+
+"react-is@^16.12.0 || ^17.0.0", "react-is@^16.8.0 || ^17.0.0", "react-is@^17.0.1", "react-is@^17.0.2":
+  "integrity" "sha1-5pHUqOnHiTZWVVOas3J2Kw77VPA="
+  "resolved" "https://registry.npmmirror.com/react-is/download/react-is-17.0.2.tgz?cache=0&sync_timestamp=1637253728914&other_urls=https%3A%2F%2Fregistry.npmmirror.com%2Freact-is%2Fdownload%2Freact-is-17.0.2.tgz"
+  "version" "17.0.2"
 
 "react-is@^16.12.0":
   "integrity" "sha1-eJcppNw23imZ3BVt1sHZwYzqVqQ="
@@ -10263,20 +10293,10 @@
   "resolved" "https://registry.npmmirror.com/react-is/download/react-is-16.13.1.tgz"
   "version" "16.13.1"
 
-"react-is@^16.8.0 || ^17.0.0", "react-is@^17.0.1":
-  "integrity" "sha512-NAnt2iGDXohE5LI7uBnLnqvLQMtzhkiAOLXTmv+qnF9Ky7xAPcX8Up/xWIhxvLVGJvuLiNc4xQLtuqDRzb4fSA=="
-  "resolved" "https://registry.npmjs.org/react-is/-/react-is-17.0.1.tgz"
-  "version" "17.0.1"
-
 "react-is@^16.8.1":
   "integrity" "sha512-24e6ynE2H+OKt4kqsOvNd8kBpV65zoxbA4BVsEOB3ARVWQki/DHzaUoC5KuON/BiccDaCCTZBuOcfZs70kR8bQ=="
   "resolved" "https://registry.npmjs.org/react-is/-/react-is-16.13.1.tgz"
   "version" "16.13.1"
-
-"react-is@^17.0.2":
-  "integrity" "sha1-5pHUqOnHiTZWVVOas3J2Kw77VPA="
-  "resolved" "https://registry.npmmirror.com/react-is/download/react-is-17.0.2.tgz"
-  "version" "17.0.2"
 
 "react-list@^0.8.13":
   "integrity" "sha512-LSxfvdwB9Ip+E+8NBtLPW2pcIngzuV0rSoH9nMt9C2lFjZEbnoBY/ib/Zx121jPgFgg3xYkMlMXSzx5gaiP5ig=="
@@ -10396,6 +10416,24 @@
   optionalDependencies:
     "fsevents" "^2.1.3"
 
+"react-shallow-renderer@^16.13.1":
+  "integrity" "sha1-vw0C34pRmlWP2bghVELvpchA4SQ="
+  "resolved" "https://registry.npmmirror.com/react-shallow-renderer/download/react-shallow-renderer-16.14.1.tgz"
+  "version" "16.14.1"
+  dependencies:
+    "object-assign" "^4.1.1"
+    "react-is" "^16.12.0 || ^17.0.0"
+
+"react-test-renderer@^17.0.0":
+  "integrity" "sha1-TNSuXvGtVnD8Dvd26Mx+EjHZhmw="
+  "resolved" "https://registry.npmmirror.com/react-test-renderer/download/react-test-renderer-17.0.2.tgz"
+  "version" "17.0.2"
+  dependencies:
+    "object-assign" "^4.1.1"
+    "react-is" "^17.0.2"
+    "react-shallow-renderer" "^16.13.1"
+    "scheduler" "^0.20.2"
+
 "react-transition-group@^4.4.0":
   "integrity" "sha512-/RNYfRAMlZwDSr6z4zNKV6xu53/e2BuaBbGhbyYIXTrmgu/bGHzmqOs7mJSJBHy9Ud+ApHx3QjrkKSp1pxvlFg=="
   "resolved" "https://registry.npmjs.org/react-transition-group/-/react-transition-group-4.4.2.tgz"
@@ -10406,7 +10444,7 @@
     "loose-envify" "^1.4.0"
     "prop-types" "^15.6.2"
 
-"react@*", "react@^0.14 || ^15.0.0-rc || >=15.0", "react@^0.14.0 || ^15.0.0 || ^16.0.0 || ^17.0.0", "react@^16.8.0 || ^17.0.0", "react@^16.8.3 || ^17", "react@^17.0.1", "react@>= 16.9.0", "react@>=15", "react@>=16.0.0", "react@>=16.6.0", "react@>=16.9.0", "react@0.14 || 15 || 16 || 17", "react@17.0.1":
+"react@*", "react@^0.14 || ^15.0.0-rc || >=15.0", "react@^0.14.0 || ^15.0.0 || ^16.0.0 || ^17.0.0", "react@^16.0.0 || ^17.0.0", "react@^16.8.0 || ^17.0.0", "react@^16.8.3 || ^17", "react@^17.0.0-0", "react@^17.0.1", "react@>= 16.9.0", "react@>=15", "react@>=16.0.0", "react@>=16.6.0", "react@>=16.9.0", "react@0.14 || 15 || 16 || 17", "react@17.0.1", "react@17.0.2":
   "integrity" "sha512-lG9c9UuMHdcAexXtigOZLX8exLWkW0Ku29qPRU8uhF2R9BN96dLCt0psvzPLlHc5OWkgymP3qwTRgbnw5BKx3w=="
   "resolved" "https://registry.npmjs.org/react/-/react-17.0.1.tgz"
   "version" "17.0.1"
@@ -11074,10 +11112,10 @@
   dependencies:
     "xmlchars" "^2.2.0"
 
-"scheduler@^0.20.1":
-  "integrity" "sha512-LKTe+2xNJBNxu/QhHvDR14wUXHRQbVY5ZOYpOGWRzhydZUqrLb2JBvLPY7cAqFmqrWuDED0Mjk7013SZiOz6Bw=="
-  "resolved" "https://registry.npmjs.org/scheduler/-/scheduler-0.20.1.tgz"
-  "version" "0.20.1"
+"scheduler@^0.20.1", "scheduler@^0.20.2":
+  "integrity" "sha1-S67jlDbjSqk7SHS93L8P6Li1DpE="
+  "resolved" "https://registry.npmmirror.com/scheduler/download/scheduler-0.20.2.tgz"
+  "version" "0.20.2"
   dependencies:
     "loose-envify" "^1.1.0"
     "object-assign" "^4.1.1"

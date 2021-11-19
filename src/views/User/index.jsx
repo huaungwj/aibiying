@@ -19,6 +19,7 @@ function User(props) {
 
     const onFinish = useCallback((value) => {
         // console.log(value);
+        console.log("submit userinfo:", value);
         const successFn = (res) => {
             const data = {
                 email: value.email,
@@ -117,10 +118,16 @@ function User(props) {
                     </Form.Item>
                 }
 
-                <button className={Style["login-button"]}>Continue</button>
+                <button
+                    className={Style["login-button"]}
+                    data-testid="submit"
+                >
+                    Continue
+                </button>
             </Form>
             <Divider plain>or</Divider>
             <button
+                data-testid="continue-btn"
                 className={Style["login-button-continue"]}
                 onClick={changeLoginType}
             >

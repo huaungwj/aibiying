@@ -46,25 +46,25 @@ const formItem = [
     {
         label: "Bathrooms",
         name: "bathrooms",
-        placeholder: "How many bathrooms are there ?",
+        placeholder: "Bathrooms",
         rules: [{ required: true, message: "Bathrooms is Required" }],
     },
     {
         label: "Bedrooms",
         name: "bedrooms",
-        placeholder: "How many Bedrooms are there ?",
+        placeholder: "Bedrooms",
         rules: [{ required: true, message: "Bedrooms is Required" }],
     },
     {
         label: "Beds",
         name: "beds",
-        placeholder: "How many beds are there in the bedroom ?",
+        placeholder: "Beds",
         rules: [{ required: true, message: "Beds is Required" }],
     },
     {
         label: "Bedtypes",
         name: "bedtypes",
-        placeholder: "What type of bed is it",
+        placeholder: "Bedtypes",
         rules: [{ required: true, message: "Bedtypes is Required" }],
         textarea: true,
         rows: 6,
@@ -72,7 +72,7 @@ const formItem = [
     {
         label: "Amenities",
         name: "amenities",
-        placeholder: "Some entertainment facilities ?",
+        placeholder: "Amenities",
         rules: [{ required: true, message: "Amenities is Required" }],
         textarea: true,
         rows: 6,
@@ -81,7 +81,9 @@ const formItem = [
 
 const HouseAdd = () => {
     const beforeUpload = useCallback(() => false, []);
-    const [fileList, setFileList] = useState([]);
+    const [fileList, setFileList] = useState([{
+        thumbnail: "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAUAAAAFCAYAAACNbyblAAAAHElEQVQI12P4//8/w38GIAXDIBKE0DHxgljNBAAO9TXL0Y4OHwAAAABJRU5ErkJggg==",
+    }]);
     const userInfo = useSelector((state) => state.user);
     const form = useRef();
     const history = useHistory();
@@ -139,6 +141,7 @@ const HouseAdd = () => {
     const handleFinish = useCallback(
         (value) => {
             const handleHouse = () => {
+                console.log("house new data:", value);
                 (id ? ApiUpdateHouse(id, value) : ApiHouseAdd(value))
                     .then((res) => {
                         message.success(id ? "success update" : "success add");
@@ -199,46 +202,6 @@ const HouseAdd = () => {
                         </Form.Item>
                     );
                 })}
-                {/* <Form.Item
-                label="Title"
-                name="title"
-                rules={[{ required: true, message: "Title is Required" }]}
-            >
-                <Input placeholder="Title" />
-            </Form.Item>
-
-            <Form.Item
-                label="Address"
-                name="address"
-                rules={[{ required: true, message: "Address is Required" }]}
-            >
-                <Input placeholder="House Address" />
-            </Form.Item>
-
-            <Form.Item
-                label="Price"
-                name="price"
-                rules={[{ required: true, message: "Address is Required" }]}
-            >
-                <Input placeholder="Price" />
-            </Form.Item>
-
-            <Form.Item label="Bathrooms" name="bathrooms">
-                <Input placeholder="How many bathrooms are there" />
-            </Form.Item>
-
-            <Form.Item label="Bedrooms" name="bedrooms">
-                <Input placeholder="How many bedrooms are there" />
-            </Form.Item>
-
-            <Form.Item label="Bedtypes" name="bedtypes">
-                <Input.TextArea placeholder="What type of bed is it" rows={6} />
-            </Form.Item>
-
-            <Form.Item label="Amenities" name="amenities">
-                <Input.TextArea placeholder="Some entertainment facilities ?" rows={6} />
-            </Form.Item>
-            */}
 
                 <Form.Item label="Thumbnail" name="thumbnail">
                     <Upload
