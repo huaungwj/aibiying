@@ -1,45 +1,21 @@
 import "@testing-library/jest-dom/extend-expect";
 import { render, cleanup } from "@testing-library/react";
-import TestBooking from "../views/Booking/Booking";
-import { Provider } from "react-redux";
-import store from "../store";
-import { setUserInfo } from "../store/actions/user";
-import { BrowserRouter as Router } from "react-router-dom";
-afterEach(cleanup);
-/**
- * Test whether the elements at the beginning and end of the component render normally
- */
+import TestBookingManage from "../components/BookingManage/BookingManage";
 
-it("There should be mybookings text", () => {
-    const { getByTestId } = render(
-        <Provider store={store}>
-            <Router>
-                <TestBooking />
-            </Router>
-        </Provider>
-    );
-    expect(getByTestId("page-desc")).toHaveTextContent(
+afterEach(cleanup);
+
+it("should render the bookings page", () => {
+    const { container, getByTestId } = render(<TestBookingManage />);
+    const bookingBox = getByTestId("bookingBox");
+    const pageTitle = getByTestId("page-title");
+
+    expect(container.innerHTML).toMatch(
         "Please manage your listing information!"
     );
+    expect(bookingBox).toContainElement(pageTitle);
 });
 
-it("should take a snapshot", async() => {
-    store.dispatch(
-        setUserInfo({
-            email: "1835773652@qq.com",
-            name: "1835773652@qq.com",
-            token: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6IjE4MzU3NzM2NTJAcXEuY29tIiwiaWF0IjoxNjM3Mjg2MzA3fQ.EzptCDGTS5b3XTUg03t-uQqPTpKZOiJgkpk8zYBwhNE",
-        })
-    );
-    const app = render(
-        <Provider store={store}>
-            <Router>
-                <TestBooking />
-            </Router>
-        </Provider>
-    );
-
-    await app.findByText("My Bookings");
-    // expect(app).toBeInTheDocument();
-    expect(app.asFragment()).toMatchSnapshot();
+it("There should be mybookings text", () => {
+    const { getByTestId } = render(<TestBookingManage />);
+    expect(getByTestId("page-title")).toHaveTextContent("My Bookings");
 });

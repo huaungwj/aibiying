@@ -13,7 +13,7 @@ function BookingManage(props) {
         >
             <section id="userBookings">
                 <h1 className="page-title" data-testid="page-title">My Bookings</h1>
-                <p data-testid="page-desc">Please manage your listing information!  </p >
+                <p>Please manage your listing information!  </p>
                 <div
                     className="row card-deck"
                     style={{
