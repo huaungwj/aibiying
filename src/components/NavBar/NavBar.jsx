@@ -1,23 +1,60 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import NavBarStyle from "./Navbar.module.css";
-import { withRouter, Link } from "react-router-dom";
-import logo from "../../assets/logo.jpg";
+import { withRouter, Link, useHistory } from "react-router-dom";
+// import logo from "../../assets/logo.jpg";
 import { SearchOutlined, MenuOutlined } from "@ant-design/icons";
 import PropTypes from "prop-types";
+import { useDispatch, useSelector } from "react-redux";
+import { setUserVisiable, clearnUserInfo } from "../../store/actions/user";
+import { setSearchParams } from "../../store/actions/search";
+import { message } from "antd";
+import Api from "../../api";
 
 function NavBar(props) {
     const [isShowSelect, setIsShowSelect] = useState(false);
+    const [keyword, setKeyWord] = useState("");
+    const dispatch = useDispatch();
+    const user = useSelector((state) => state.user);
+    // const search = useSelector((state) => state.search);
+    const history = useHistory();
 
     const onChangeSelectStatus = (status) => {
         setIsShowSelect(status);
+    };
+
+    // logout
+    const logout = () => {
+        // console.log("123");
+        // 清除localstorage 和 redux
+        Api.Logout()
+            .then(() => {
+                message.success("Logout succeeded");
+                dispatch(clearnUserInfo());
+                localStorage.removeItem("AirbnbAuthUserInfo");
+            })
+            .catch((err) => {
+                message.error(`${err}.`);
+            });
+    };
+    // input change
+    const changeKeyWord = (e) => {
+        // console.log(e.target.value);
+        dispatch(setSearchParams({ keyword: e.target.value }));
+        setKeyWord(e.target.value);
+    };
+    // link search submit
+    const submitClick = () => {
+        // link
+        // console.log(search)
+        history.push("/search");
     };
 
     return (
         <div className={NavBarStyle.navBarContainer}>
             {/* logo */}
             <div className={NavBarStyle.navBarLogo}>
-                <Link to="/">
-                    <img src={logo} />
+                <Link to="/" style={{ fontSize: "24px", color: "#ff385c" }}>
+                    AirBrB
                 </Link>
             </div>
             {/* 搜索框 */}
@@ -26,8 +63,15 @@ function NavBar(props) {
                     <input
                         className={NavBarStyle.navBarSearchInput}
                         placeholder={"start your search"}
+                        value={keyword}
+                        onChange={changeKeyWord}
                     />
-                    <div className={NavBarStyle.navBarSearchSubmit}>
+                    <div
+                        className={NavBarStyle.navBarSearchSubmit}
+                        onClick={() => {
+                            submitClick();
+                        }}
+                    >
                         <SearchOutlined />
                     </div>
                 </button>
@@ -42,7 +86,7 @@ function NavBar(props) {
                                 : ""
                         }
                     >
-                        <Link to="/">首页</Link>
+                        <Link to="/">Home</Link>
                     </li>
                     <li
                         className={
@@ -51,10 +95,18 @@ function NavBar(props) {
                                 : ""
                         }
                     >
-                        <Link to="/house">房源</Link>
+                        <Link to="/house" data-testid="House">
+                            House
+                        </Link>
                     </li>
-                    <li>
-                        <Link to="/">预定管理</Link>
+                    <li
+                        className={
+                            /^\/booking/.test(props.location.pathname)
+                                ? NavBarStyle.liActive
+                                : ""
+                        }
+                    >
+                        <Link to="/booking">Booking</Link>
                     </li>
                 </ul>
                 {/* 个人中心 */}
@@ -64,7 +116,7 @@ function NavBar(props) {
                         onChangeSelectStatus(!isShowSelect, e);
                     }}
                 >
-                    <button>
+                    <button data-testid="user-avater">
                         <MenuOutlined />
                         <svg
                             className={NavBarStyle.personalSvg}
@@ -87,19 +139,23 @@ function NavBar(props) {
                     {/* 下拉列表 */}
                     <div
                         className={NavBarStyle.personalSelect}
-                        style={{ display: isShowSelect ? "flex" : "none" }}
+                        style={{
+                            display: isShowSelect ? "flex" : "none",
+                        }}
                     >
                         <ul>
                             <li
                                 className={NavBarStyle.PersonalLiFirst}
                                 onClick={(e) => {
                                     e.nativeEvent.stopImmediatePropagation();
-                                    console.log(123);
+                                    if (user.email) return;
+                                    dispatch(setUserVisiable(true));
+                                    // console.log(123);
                                 }}
                             >
-                                Login
+                                {user.email ? user.email : "Login"}
                             </li>
-                            <li>sign up</li>
+                            <li onClick={logout}>logout</li>
                         </ul>
                     </div>
                 </div>

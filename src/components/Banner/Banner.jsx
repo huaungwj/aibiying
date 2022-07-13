@@ -1,5 +1,5 @@
 import { Button } from "@material-ui/core";
-import React, { useState, useCallback, useEffect } from "react";
+import { useState, useCallback, useEffect } from "react";
 import SearchOutlinedIcon from "@material-ui/icons/SearchOutlined";
 import RemoveIcon from "@material-ui/icons/Remove";
 import AddIcon from "@material-ui/icons/Add";
@@ -20,7 +20,7 @@ function Banner() {
     // price change
     const priceChange = useCallback((e) => {
         if (!e.target.value.trim()) return setPrice(0);
-        console.log(e.target.value);
+        // console.log(e.target.value);
         setPrice(parseInt(e.target.value));
     });
     // params change

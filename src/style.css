@@ -35,6 +35,8 @@ body::-webkit-scrollbar-thumb {
     font-size: 1.8rem !important;
 }
 .banner {
+    z-index: 1;
+    position: relative;
     background: linear-gradient(#00000000, #000000ad),
         url("./assets/banner.png");
     height: 90vh;
@@ -135,3 +137,14 @@ body::-webkit-scrollbar-thumb {
         object-fit: cover !important;
     }
 }
+
+/* booking */
+
+#userBookings .card {
+    background-color: #fff;
+    border-radius: 12px;
+    box-shadow: 0px 13px 10px -7px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+    min-height: 570px;
+}
+

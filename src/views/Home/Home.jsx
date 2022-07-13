@@ -1,23 +1,10 @@
-import React, { useState } from "react";
+import { useState } from "react";
 // import HomeStyle from "./Home.module.css";
 // import SearchInput from "../../components/SearchInput/SearchInput";
 import Banner from "../../components/Banner/Banner";
 import HomeCard from "../../components/HomeCard/HomeCard";
 import CardData from "../../tools/data1.json";
 import CardData2 from "../../tools/data2.json";
-
-// <div className={`${HomeStyle.homeContainer} aby_container`}>
-// {/* text */}
-//  <div className={`${HomeStyle.bannerBox} aby_container`}>
-//      <span className={`ThemeColor ${HomeStyle.bannerText}`}>
-//         Airbnb 爱彼迎{" "}
-//      </span>
-//      <p>全球 700 万民宿任你挑</p>
-//  </div>
-//  {/* search */}
-//  <SearchInput />
-//  {/* {search result} */}
-// </div>
 
 export default function Home() {
     const [data] = useState(CardData);

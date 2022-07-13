@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import SearchInputStyle from "./SearchInput.module.css";
 import { Slider, InputNumber, DatePicker } from "antd"; // InputNumber, DatePicker
 import {
@@ -19,14 +19,14 @@ function SearchInput() {
 
     // 卧室选择发生变化
     const onChangeBedroomsNumber = (value) => {
-        console.log(value);
+        // console.log(value);
         const data = { ...JSON.parse(JSON.stringify(searchFormData)) };
         data.bedroomsNumber = value;
         setSearchFormData(data);
     };
     // 日期范围发生变化
     const rangDateChange = (dates, dateStrings) => {
-        console.log(dates, dateStrings);
+        // console.log(dates, dateStrings);
     };
     // {/* 卧室数量 、日期范围、价格、评论评分 从最高到最低评论评级或从最低到最高评论评级对结果进行排序,具体取决于 如果有多个列表具有相同的评级,则它们的顾序无关紧要 */}
     return (

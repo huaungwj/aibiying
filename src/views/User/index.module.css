@@ -56,9 +56,9 @@ input.login-control:focus {
     padding: 0 4px;
 }
 
-div.input-control-container {
-    /* margin-top: 26px; */
-}
+/* div.input-control-container {
+    margin-top: 26px;
+} */
 
 .login-button {
     display: block;

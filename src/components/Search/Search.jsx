@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import "react-date-range/dist/styles.css"; // main style file
 import "react-date-range/dist/theme/default.css"; // theme css file
 import { DateRangePicker } from "react-date-range";
@@ -18,13 +18,15 @@ function Search() {
     };
 
     function handleSelect(ranges) {
-        console.log(ranges);
+        // console.log(ranges);
         setStartDate(ranges.selection.startDate);
         setEndDate(ranges.selection.endDate);
-        dispatch(SearchAction.setSearchParams({
-            startDate: ranges.selection.startDate,
-            endDate: ranges.selection.endDate
-        }))
+        dispatch(
+            SearchAction.setSearchParams({
+                startDate: ranges.selection.startDate,
+                endDate: ranges.selection.endDate,
+            })
+        );
     }
 
     return (

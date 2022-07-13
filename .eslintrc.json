@@ -8,6 +8,7 @@
     "extends": [
         "eslint:recommended",
         "plugin:react/recommended",
+        "plugin:react/jsx-runtime",
         "standard"
     ],
     "parserOptions": {
@@ -28,5 +29,10 @@
         "indent": ["error", 4],
         "quotes": ["error", "double"],
         "space-before-function-paren": ["error", "never"]
+    },
+    "settings": {
+        "react": {
+            "version": "detect"
+        }
     }
 }
